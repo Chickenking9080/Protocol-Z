@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://boknivrt05den"]
+
+[ext_resource type="PackedScene" uid="uid://bnvmxod828a1j" path="res://Models/raspberry.glb" id="1_dtlie"]
+[ext_resource type="Material" uid="uid://b8d1kuqcuwnjk" path="res://Models/highlight.tres" id="2_dtlie"]
+
+[node name="raspberry_bush_ghost" type="Node3D" unique_id=1507487083]
+
+[node name="raspberry" parent="." unique_id=1734959641 instance=ExtResource("1_dtlie")]
+
+[node name="Cylinder" parent="raspberry" index="0" unique_id=299427857]
+surface_material_override/0 = ExtResource("2_dtlie")
+
+[node name="Icosphere" parent="raspberry" index="1" unique_id=680671995]
+surface_material_override/0 = ExtResource("2_dtlie")
+surface_material_override/1 = ExtResource("2_dtlie")
+
+[editable path="raspberry"]

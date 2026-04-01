@@ -1,0 +1,19 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://djus6x2j720ye"]
+
+[ext_resource type="Shader" uid="uid://mtjtoaiwqo5r" path="res://Models/water.gdshader" id="1_5g4dc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x5t1e"]
+render_priority = 0
+shader = ExtResource("1_5g4dc")
+shader_parameter/WATER_COL = Vector4(0.04, 0.38, 0.88, 1)
+shader_parameter/WATER2_COL = Vector4(0.04, 0.35, 0.78, 1)
+shader_parameter/FOAM_COL = Vector4(0.8125, 0.9609, 0.9648, 1)
+shader_parameter/distortion_speed = 2.0
+shader_parameter/tile = Vector2(1000, 1000)
+shader_parameter/height = 0.0
+shader_parameter/wave_size = Vector2(13.525, 38.51)
+shader_parameter/wave_speed = 0.3
+
+[resource]
+next_pass = SubResource("ShaderMaterial_x5t1e")
+albedo_color = Color(0, 1, 1, 1)

@@ -1,0 +1,522 @@
+[gd_scene format=3 uid="uid://cw8w6clmxedi6"]
+
+[ext_resource type="Script" uid="uid://7g0275t5jw14" path="res://player.gd" id="1_hwwnj"]
+[ext_resource type="PackedScene" uid="uid://b671fl238r05r" path="res://Items/log.tscn" id="2_b26j0"]
+[ext_resource type="Script" uid="uid://on2gvsqp3xv6" path="res://player_input.gd" id="2_ju3m6"]
+[ext_resource type="PackedScene" uid="uid://lxxiah7f014x" path="res://rock.tscn" id="3_b26j0"]
+[ext_resource type="PackedScene" uid="uid://bwe7s71onffen" path="res://axe.tscn" id="3_i3pqv"]
+[ext_resource type="PackedScene" uid="uid://dsekbghvblcca" path="res://Buildings/house_blueprint.tscn" id="4_b26j0"]
+[ext_resource type="PackedScene" uid="uid://cswal1i6diiqm" path="res://Buildings/house_blueprintacctuallyputdown.tscn" id="4_n7ghd"]
+[ext_resource type="Texture2D" uid="uid://chqym1xnkvb8x" path="res://images/empty.svg" id="5_dw050"]
+[ext_resource type="PackedScene" uid="uid://dijysbmltksvy" path="res://Items/raspberry_bush_full.tscn" id="6_606se"]
+[ext_resource type="Texture2D" uid="uid://c4r78788ny1p0" path="res://images/axe.svg" id="6_b26j0"]
+[ext_resource type="PackedScene" uid="uid://bvsmacr025ci5" path="res://Models/campfire.glb" id="6_u1c27"]
+[ext_resource type="Texture2D" uid="uid://dsbtqn0gc6lga" path="res://images/log.svg" id="7_n7ghd"]
+[ext_resource type="PackedScene" uid="uid://boknivrt05den" path="res://Items/raspberry_bush_ghost.tscn" id="7_u1c27"]
+[ext_resource type="PackedScene" uid="uid://u1cab5fio1e5" path="res://Models/torch.glb" id="8_nvl01"]
+[ext_resource type="Material" uid="uid://cu2bcfk0h7shn" path="res://Models/black.tres" id="9_ivps1"]
+[ext_resource type="Shader" uid="uid://c87svpks21sy3" path="res://Models/player.gdshader" id="13_op7ga"]
+[ext_resource type="Script" uid="uid://cgrm6anltxaxs" path="res://scripts/fps_counter.gd" id="13_urp6f"]
+[ext_resource type="Script" uid="uid://cerxpooufqrbb" path="res://menu.gd" id="14_5tmop"]
+[ext_resource type="Script" uid="uid://bsoalm5lt4a8n" path="res://enable_animation.gd" id="14_7ahtn"]
+[ext_resource type="Texture2D" uid="uid://djthnkfpkw12c" path="res://images/house.svg" id="18_7ahtn"]
+[ext_resource type="Texture2D" uid="uid://uqw3yilkasf8" path="res://images/raspberry.svg" id="19_7lmhl"]
+[ext_resource type="Texture2D" uid="uid://dfmsnm1v1j3q6" path="res://images/campfire.svg" id="20_dx0e4"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_fb1vy"]
+properties/0/path = NodePath(".:player")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:velocity")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("Camera3D/axe:visible")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("Camera3D/torch:visible")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hoavk"]
+properties/0/path = NodePath(".:direction")
+properties/0/spawn = false
+properties/0/replication_mode = 1
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_37qaq"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jab13"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q13i1"]
+shader = ExtResource("13_op7ga")
+shader_parameter/resolution_x = 640
+shader_parameter/resolution_y = 480
+shader_parameter/color_bit_depth = 6
+shader_parameter/dither_strength = 0.005
+shader_parameter/jitter_amount = 0.0
+shader_parameter/jitter_speed = 0.77
+shader_parameter/jitter_frequency = 64.37
+shader_parameter/chromatic_aberration_strength = 0.01200000057
+shader_parameter/vignette_strength = 0.0
+shader_parameter/vignette_radius = 0.0
+
+[sub_resource type="Animation" id="Animation_ivps1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.6103591, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_urp6f"]
+resource_name = "hit"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.23333333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.6103591, 0, 0), Vector3(-1.530706, 0, 0), Vector3(-0.6103591, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bwjto"]
+_data = {
+&"RESET": SubResource("Animation_ivps1"),
+&"hit": SubResource("Animation_urp6f")
+}
+
+[sub_resource type="Animation" id="Animation_5tmop"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.218]
+}
+
+[sub_resource type="Animation" id="Animation_7ahtn"]
+resource_name = "fliker"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-1.3666666, -0.70000005, -0.0333333, 0, 0.6333332, 0.8000002, 1.3333334, 1.4666667, 1.8000002, 2.1666667, 2.4666667, 2.6333337, 3.3000002, 3.4666667, 4.133333, 4.2000003, 4.7000003, 4.8333335, 4.866667, 5.2999997, 5.366667, 5.5666666, 5.8666663, 5.9666667, 6.0666666, 6.2999997, 6.5333323, 6.766667, 6.9666667, 7.233333, 7.3333335, 7.433334, 7.6666665, 7.766667, 7.9999995, 8.133333, 8.200001, 8.433334, 8.633333, 8.7, 8.866667, 9.133333, 9.299999, 9.566667, 10),
+"transitions": PackedFloat32Array(1, 1, 1e-05, 1, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 4.4680295e-05, 1e-05, 1e-05, 1e-05, 4.4680295e-05, 1e-05, 1e-05, 1e-05, 4.4680295e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 7.011102e-05, 1e-05, 1e-05, 1e-05, 7.011102e-05, 1e-05, 2.157923e-05, 1e-05, 1e-05, 7.011102e-05, 2.157923e-05, 1e-05, 1e-05, 2.157923e-05, 1e-05),
+"update": 0,
+"values": [3.218, 3.218, 2.182, 3.218, 2.182, 3.779, 2.182, 3.779, 3.379, 3.779, 3.379, 2.376, 2.376, 0.853, 0.853, 3.92, 3.098, 0.853, 3.92, 2.376, 3.098, 3.92, 3.239, 2.376, 3.098, 1.835, 3.239, 1.674, 1.835, 3.239, 2.958, 1.674, 1.835, 3.519, 2.958, 1.674, 3.66, 3.519, 3.218, 2.958, 3.66, 3.519, 3.218, 3.66, 3.218]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7lmhl"]
+_data = {
+&"RESET": SubResource("Animation_5tmop"),
+&"fliker": SubResource("Animation_7ahtn")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_ivps1"]
+font_size = 189
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_b26j0"]
+width = 110
+height = 110
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jm5j8"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_urp6f"]
+radius = 1.0185547
+
+[sub_resource type="LabelSettings" id="LabelSettings_bwjto"]
+font_size = 39
+
+[node name="Player" type="CharacterBody3D" unique_id=1701255094 groups=["player"]]
+script = ExtResource("1_hwwnj")
+log_scene = ExtResource("2_b26j0")
+rock_scene = ExtResource("3_b26j0")
+house_scene = ExtResource("4_n7ghd")
+house_ghost_scene = ExtResource("4_b26j0")
+campfire_scene = ExtResource("6_u1c27")
+campfire_ghost_scene = ExtResource("6_u1c27")
+raspberry_bush_scene = ExtResource("6_606se")
+raspberry_bush_ghost_scene = ExtResource("7_u1c27")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2132657549]
+replication_config = SubResource("SceneReplicationConfig_fb1vy")
+
+[node name="PlayerInput" type="MultiplayerSynchronizer" parent="." unique_id=2073648719]
+root_path = NodePath(".")
+replication_config = SubResource("SceneReplicationConfig_hoavk")
+script = ExtResource("2_ju3m6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=242842582 groups=["player"]]
+shape = SubResource("CapsuleShape3D_37qaq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2091717145]
+mesh = SubResource("CapsuleMesh_jab13")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1564034191]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49330866, 0)
+fov = 64.3577
+
+[node name="ColorRect" type="ColorRect" parent="Camera3D" unique_id=1866700970]
+material = SubResource("ShaderMaterial_q13i1")
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="Control" type="Control" parent="Camera3D" unique_id=270330512]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="Button" type="Button" parent="Camera3D/Control" unique_id=1833268429]
+layout_mode = 0
+offset_left = 960.0
+offset_top = 540.0
+offset_right = 968.0
+offset_bottom = 548.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Camera3D/Control" unique_id=2133828074]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -3.0
+offset_right = 1918.0
+offset_bottom = 1077.0
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=721431899]
+transform = Transform3D(14.24, 0, 0, 0, 14.23, 0, 0, 0, 1.005, 0, 0, -0.52293783)
+target_position = Vector3(0, 0, -2.94)
+collide_with_areas = true
+
+[node name="RayCast3D2" type="RayCast3D" parent="Camera3D" unique_id=109252643]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.53067786)
+target_position = Vector3(0, 0, -20)
+collision_mask = 8
+collide_with_areas = true
+
+[node name="axe" parent="Camera3D" unique_id=1343986137 instance=ExtResource("3_i3pqv")]
+transform = Transform3D(0.59, 0, 0, 0, 0.483471, 0.33816534, 0, -0.33816546, 0.48347083, 0.49852374, -0.35056818, -0.6549202)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D/axe" unique_id=1256555902]
+libraries/ = SubResource("AnimationLibrary_bwjto")
+
+[node name="HoldPosition" type="Marker3D" parent="Camera3D" unique_id=374082839]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19203913, 0, -2.1197944)
+
+[node name="torch" parent="Camera3D" unique_id=1921091909 instance=ExtResource("8_nvl01")]
+transform = Transform3D(0.33, 0, 0, 0, -1.4424758e-08, 0.33, 0, -0.33, -1.4424758e-08, 0.4521894, -0.062152207, -0.8721428)
+
+[node name="Cylinder" parent="Camera3D/torch" index="0" unique_id=1591837455]
+surface_material_override/0 = ExtResource("9_ivps1")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D/torch" unique_id=1179012125]
+transform = Transform3D(3.030303, 0, 0, 0, -1.3245875e-07, -3.030303, 0, 3.030303, -1.3245875e-07, 0, 0, 0)
+light_energy = 3.218
+shadow_enabled = true
+distance_fade_enabled = true
+spot_range = 22.621492
+spot_angle = 43.139713
+spot_angle_attenuation = 0.31864017
+script = ExtResource("14_7ahtn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D/torch/SpotLight3D" unique_id=1994797787]
+libraries/ = SubResource("AnimationLibrary_7lmhl")
+
+[node name="Control2" type="Control" parent="Camera3D" unique_id=417732959]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="Health" type="ProgressBar" parent="Camera3D/Control2" unique_id=1090598400]
+layout_mode = 0
+offset_right = 240.0
+offset_bottom = 27.0
+show_percentage = false
+
+[node name="Thirst" type="ProgressBar" parent="Camera3D/Control2" unique_id=1787382174]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 240.0
+offset_bottom = 67.0
+show_percentage = false
+
+[node name="Hunger" type="ProgressBar" parent="Camera3D/Control2" unique_id=1234023594]
+layout_mode = 0
+offset_top = 80.0
+offset_right = 240.0
+offset_bottom = 107.0
+show_percentage = false
+
+[node name="Control3" type="Control" parent="Camera3D" unique_id=10322414]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Camera3D/Control3" unique_id=1552367085]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1077.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="Camera3D/Control3/ColorRect" unique_id=1149915997]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_top = -12.5
+offset_right = 32.5
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "You Ded"
+label_settings = SubResource("LabelSettings_ivps1")
+
+[node name="UI" type="Control" parent="." unique_id=2041218705]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("14_5tmop")
+
+[node name="InventoryMenu" type="CanvasLayer" parent="UI" unique_id=1841789690]
+
+[node name="VBox" type="VBoxContainer" parent="UI/InventoryMenu" unique_id=1844002890]
+offset_right = 270.0
+offset_bottom = 747.0
+scale = Vector2(0.89, 0.89)
+
+[node name="AxeButton" type="Button" parent="UI/InventoryMenu/VBox" unique_id=546195622]
+layout_mode = 2
+text = "Axe"
+icon = ExtResource("6_b26j0")
+
+[node name="TorchButton" type="Button" parent="UI/InventoryMenu/VBox" unique_id=1977874687]
+layout_mode = 2
+text = "Torch"
+icon = ExtResource("6_b26j0")
+
+[node name="HandButton" type="Button" parent="UI/InventoryMenu/VBox" unique_id=1285707805]
+layout_mode = 2
+text = "Empty Hands"
+icon = ExtResource("5_dw050")
+
+[node name="LogButton" type="Button" parent="UI/InventoryMenu/VBox" unique_id=1861181294]
+layout_mode = 2
+text = "Log"
+icon = ExtResource("7_n7ghd")
+
+[node name="RockButton" type="Button" parent="UI/InventoryMenu/VBox" unique_id=860159923]
+layout_mode = 2
+text = "rock"
+icon = SubResource("NoiseTexture2D_b26j0")
+
+[node name="WaterButton" type="Button" parent="UI/InventoryMenu/VBox" unique_id=296494108]
+layout_mode = 2
+text = "water
+"
+icon = SubResource("NoiseTexture2D_b26j0")
+
+[node name="FoodButton" type="Button" parent="UI/InventoryMenu/VBox" unique_id=1884139935]
+layout_mode = 2
+text = "food
+"
+icon = ExtResource("7_n7ghd")
+
+[node name="LogLabel" type="Label" parent="UI/InventoryMenu/VBox" unique_id=792354178]
+layout_mode = 2
+text = "hehe"
+
+[node name="RockLabel" type="Label" parent="UI/InventoryMenu/VBox" unique_id=1099517352]
+layout_mode = 2
+text = "hehe"
+
+[node name="FoodLabel" type="Label" parent="UI/InventoryMenu/VBox" unique_id=1764629497]
+layout_mode = 2
+text = "hehe"
+
+[node name="WaterLabel" type="Label" parent="UI/InventoryMenu/VBox" unique_id=1517283285]
+layout_mode = 2
+text = "hehe"
+
+[node name="ColorRect" type="ColorRect" parent="UI/InventoryMenu" unique_id=802493734]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="buildingmenu" type="Button" parent="UI/InventoryMenu" unique_id=330081348]
+offset_left = 1488.0
+offset_top = 99.0
+offset_right = 1758.0
+offset_bottom = 210.0
+text = "Building Menu"
+icon = ExtResource("6_b26j0")
+
+[node name="Crafting" type="CanvasLayer" parent="UI" unique_id=2096694815]
+
+[node name="Building" type="CanvasLayer" parent="UI" unique_id=943047855]
+visible = false
+
+[node name="Panel" type="Panel" parent="UI/Building" unique_id=1984279]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -722.0
+offset_top = -423.5
+offset_right = 722.0
+offset_bottom = 423.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jm5j8")
+
+[node name="housebutton" type="Button" parent="UI/Building/Panel" unique_id=462489586]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 204.0
+offset_bottom = 204.0
+scale = Vector2(0.72, 0.72)
+icon = ExtResource("18_7ahtn")
+
+[node name="raspberrybutton" type="Button" parent="UI/Building/Panel" unique_id=742199377]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 50.0
+offset_right = 311.0
+offset_bottom = 161.00005
+scale = Vector2(0.14, 0.14)
+icon = ExtResource("19_7lmhl")
+
+[node name="Button3" type="Button" parent="UI/Building/Panel" unique_id=2053332891]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 50.5
+offset_right = 461.0
+offset_bottom = 161.50005
+scale = Vector2(0.14, 0.14)
+icon = ExtResource("20_dx0e4")
+
+[node name="Button4" type="Button" parent="UI/Building/Panel" unique_id=1949084852]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 50.5
+offset_right = 611.001
+offset_bottom = 161.50005
+icon = ExtResource("6_b26j0")
+
+[node name="Button5" type="Button" parent="UI/Building/Panel" unique_id=1933510351]
+layout_mode = 0
+offset_left = 652.0
+offset_top = 50.5
+offset_right = 763.0
+offset_bottom = 161.50005
+icon = ExtResource("6_b26j0")
+
+[node name="Button6" type="Button" parent="UI/Building/Panel" unique_id=770534750]
+layout_mode = 0
+offset_left = 802.0
+offset_top = 50.5
+offset_right = 913.0
+offset_bottom = 161.50005
+icon = ExtResource("6_b26j0")
+
+[node name="Button7" type="Button" parent="UI/Building/Panel" unique_id=1974642386]
+layout_mode = 0
+offset_left = 952.0
+offset_top = 51.0
+offset_right = 1063.0
+offset_bottom = 162.00005
+icon = ExtResource("6_b26j0")
+
+[node name="Button8" type="Button" parent="UI/Building/Panel" unique_id=414146867]
+layout_mode = 0
+offset_left = 1102.0
+offset_top = 51.0
+offset_right = 1213.001
+offset_bottom = 162.00005
+icon = ExtResource("6_b26j0")
+
+[node name="Button9" type="Button" parent="UI/Building/Panel" unique_id=1301926563]
+layout_mode = 0
+offset_left = 1250.0
+offset_top = 51.0
+offset_right = 1361.001
+offset_bottom = 162.00005
+icon = ExtResource("6_b26j0")
+
+[node name="close" type="Button" parent="UI/Building/Panel" unique_id=731685578]
+layout_mode = 0
+offset_left = 1308.0
+offset_top = 714.5
+offset_right = 1419.0
+offset_bottom = 825.5
+icon = ExtResource("5_dw050")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=184694062]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.317236, 0)
+text = "DEFAULT"
+
+[node name="Area3D" type="Area3D" parent="." unique_id=281005447]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1479672767]
+shape = SubResource("CylinderShape3D_urp6f")
+
+[node name="Label" type="Label" parent="." unique_id=2122598917]
+offset_left = 1726.0
+offset_top = -3.0
+offset_right = 1887.0
+offset_bottom = 69.0
+text = "FPS 69"
+label_settings = SubResource("LabelSettings_bwjto")
+script = ExtResource("13_urp6f")
+
+[connection signal="pressed" from="UI/InventoryMenu/VBox/AxeButton" to="." method="_on_axe_button_pressed"]
+[connection signal="pressed" from="UI/InventoryMenu/VBox/TorchButton" to="." method="_on_torch_button_pressed"]
+[connection signal="pressed" from="UI/InventoryMenu/VBox/HandButton" to="." method="_on_hand_button_pressed"]
+[connection signal="pressed" from="UI/InventoryMenu/VBox/LogButton" to="." method="_on_log_button_pressed"]
+[connection signal="pressed" from="UI/InventoryMenu/VBox/RockButton" to="." method="_on_rock_button_pressed"]
+[connection signal="pressed" from="UI/InventoryMenu/VBox/WaterButton" to="." method="drink_water"]
+[connection signal="pressed" from="UI/InventoryMenu/VBox/FoodButton" to="." method="_on_food_button_pressed"]
+[connection signal="pressed" from="UI/InventoryMenu/buildingmenu" to="UI" method="_on_buildingmenu_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/housebutton" to="." method="_on_craft_house_button_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/housebutton" to="UI" method="_on_buildbutton_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/raspberrybutton" to="." method="_on_craft_raspberry_bush_button_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/raspberrybutton" to="UI" method="_on_buildbutton_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/close" to="UI" method="_on_close_pressed"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+
+[editable path="Camera3D/torch"]

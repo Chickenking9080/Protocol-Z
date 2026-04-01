@@ -1,0 +1,530 @@
+[gd_scene format=3 uid="uid://bvnwjpd0f3oa0"]
+
+[ext_resource type="Script" uid="uid://ca1uep71puapd" path="res://multiplayer.gd" id="1_jiv4u"]
+[ext_resource type="Script" uid="uid://dqnwtjo1731tv" path="res://menu_manager.gd" id="2_5bi2t"]
+[ext_resource type="Theme" uid="uid://bsjw7wausmdqb" path="res://font_menu_inputs.tres" id="3_r1ube"]
+[ext_resource type="FontFile" uid="uid://dnuoumjtjvhgb" path="res://ARCADECLASSIC.TTF" id="3_wuni8"]
+[ext_resource type="Theme" uid="uid://dban654qiu5pj" path="res://font_menu.tres" id="5_r1ube"]
+[ext_resource type="Script" uid="uid://cfij34riayc56" path="res://quit_menu.gd" id="6_ox3ly"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wktud"]
+font = ExtResource("3_wuni8")
+font_size = 37
+
+[sub_resource type="LabelSettings" id="LabelSettings_o4y1c"]
+font = ExtResource("3_wuni8")
+font_size = 25
+shadow_size = 6
+
+[sub_resource type="LabelSettings" id="LabelSettings_5bi2t"]
+font = ExtResource("3_wuni8")
+font_size = 53
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_r1ube"]
+font = ExtResource("3_wuni8")
+font_size = 158
+outline_size = 10
+outline_color = Color(1, 0, 0, 1)
+shadow_size = 38
+shadow_color = Color(0, 0, 0, 0.5529412)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ox3ly"]
+font = ExtResource("3_wuni8")
+font_size = 25
+outline_size = 4
+outline_color = Color(1, 0, 0, 1)
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sqe1x"]
+bg_color = Color(0.35686275, 0.35686275, 0.35686275, 0.19607843)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fxi6q"]
+font = ExtResource("3_wuni8")
+font_size = 59
+
+[sub_resource type="Theme" id="Theme_56a3p"]
+default_font = ExtResource("3_wuni8")
+default_font_size = 51
+
+[sub_resource type="LabelSettings" id="LabelSettings_56a3p"]
+font = ExtResource("3_wuni8")
+font_size = 39
+
+[sub_resource type="LabelSettings" id="LabelSettings_sqe1x"]
+font = ExtResource("3_wuni8")
+font_size = 32
+font_color = Color(1, 0, 0, 1)
+
+[node name="Multiplayer" type="Node" unique_id=645816240]
+script = ExtResource("1_jiv4u")
+
+[node name="Level" type="Node" parent="." unique_id=1813880049]
+
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="." unique_id=1390398754]
+_spawnable_scenes = PackedStringArray("uid://2133e2dx8baa", "uid://lxxiah7f014x", "uid://b671fl238r05r")
+spawn_path = NodePath("../Level")
+spawn_limit = 1
+
+[node name="UI" type="Control" parent="." unique_id=118936516]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Lobby" type="Control" parent="UI" unique_id=218098478]
+visible = false
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="PlayerList" type="VBoxContainer" parent="UI/Lobby" unique_id=1909572121]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.67600006
+anchor_bottom = 1.0
+offset_left = -255.0
+offset_top = -213.0
+offset_right = -117.920166
+offset_bottom = -88.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerCount" type="Label" parent="UI/Lobby" unique_id=292724521]
+layout_mode = 0
+offset_left = 891.0
+offset_top = 81.0
+offset_right = 1021.0
+offset_bottom = 132.0
+text = "players"
+label_settings = SubResource("LabelSettings_wktud")
+
+[node name="ReadyButton" type="Button" parent="UI/Lobby" unique_id=396178217]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -148.5
+offset_top = -293.37
+offset_right = 148.5
+offset_bottom = -229.36975
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("5_r1ube")
+text = "  Ready   To    Begin? "
+
+[node name="StartButton" type="Button" parent="UI/Lobby" unique_id=269762422]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -148.5
+offset_top = -187.16498
+offset_right = 148.5
+offset_bottom = -123.164734
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("5_r1ube")
+disabled = true
+text = "Start Game"
+
+[node name="Control" type="Control" parent="UI" unique_id=1536579100]
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="Username" type="LineEdit" parent="UI/Control" unique_id=2119105541]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -436.0
+offset_right = 260.0
+offset_bottom = -405.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_r1ube")
+placeholder_text = "Enter Username"
+alignment = 1
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="Label3" type="Label" parent="UI/Control" unique_id=1914519731]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -545.75
+offset_right = 545.75
+offset_bottom = 91.0
+grow_horizontal = 2
+text = "LOCAL MULTIPLAYER ONLY! ENTER HOSTS IP ADDRESS AND CONNECT 
+IF YOU ARE THE HOST ENTER AMOUNT OF PLAYERS AND PRESS HOST, SERVER WILL WAIT FOR ALL PLAYERS TO BE IN TO BEGIN GAME"
+label_settings = SubResource("LabelSettings_o4y1c")
+horizontal_alignment = 1
+
+[node name="ConnectButton" type="Button" parent="UI/Control" unique_id=1604766331]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -244.0
+offset_top = -308.0
+offset_right = 256.0
+offset_bottom = -277.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_r1ube")
+text = "Connect"
+
+[node name="Remote" type="LineEdit" parent="UI/Control" unique_id=1932876242]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -244.0
+offset_top = -351.0
+offset_right = 256.0
+offset_bottom = -320.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_r1ube")
+text = "127.0.0.1"
+placeholder_text = "Remote Host"
+alignment = 1
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="HostButton" type="Button" parent="UI/Control" unique_id=1873296305]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -177.5
+offset_right = 250.0
+offset_bottom = -146.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_r1ube")
+text = "Host"
+
+[node name="PlayerCount" type="LineEdit" parent="UI/Control" unique_id=1077564932]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -219.0
+offset_right = 250.0
+offset_bottom = -188.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_r1ube")
+placeholder_text = "How Many Players?"
+alignment = 1
+caret_blink = true
+caret_blink_interval = 0.5
+
+[node name="DiscoveredServers" type="VBoxContainer" parent="UI/Control" unique_id=2126435505]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -6.0
+offset_right = 399.0
+offset_bottom = 679.0
+
+[node name="Label" type="Label" parent="UI/Control" unique_id=1728735392]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "hehe"
+label_settings = SubResource("LabelSettings_5bi2t")
+horizontal_alignment = 1
+
+[node name="Close" type="Button" parent="UI/Control" unique_id=1805040939]
+layout_mode = 0
+offset_left = 1513.0
+offset_top = 219.0
+offset_right = 1783.0
+offset_bottom = 283.0
+theme = ExtResource("3_r1ube")
+text = "Close Menu"
+
+[node name="Chat" type="Control" parent="." unique_id=1388011216]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 432.0
+offset_bottom = 600.0
+
+[node name="Input" type="LineEdit" parent="Chat" unique_id=368273401]
+visible = false
+layout_mode = 0
+offset_top = 519.0
+offset_right = 369.0
+offset_bottom = 550.0
+theme = ExtResource("3_r1ube")
+placeholder_text = "Type   Here"
+alignment = 1
+
+[node name="Log" type="VBoxContainer" parent="Chat" unique_id=693681846]
+layout_mode = 0
+offset_right = 367.0
+offset_bottom = 519.0
+
+[node name="MainMenu" type="Control" parent="." unique_id=560713890 node_paths=PackedStringArray("UI", "Menu", "MP")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("2_5bi2t")
+UI = NodePath("../UI")
+Menu = NodePath(".")
+MP = NodePath("../UI/Control")
+
+[node name="Multiplayer" type="Button" parent="MainMenu" unique_id=1592334375]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -267.5
+offset_top = -27.5
+offset_right = 267.5
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_wuni8")
+theme_override_font_sizes/font_size = 35
+text = "Multiplayer"
+
+[node name="Quit" type="Button" parent="MainMenu" unique_id=2047632348]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -267.5
+offset_top = 51.429993
+offset_right = 267.5
+offset_bottom = 106.430115
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_wuni8")
+theme_override_font_sizes/font_size = 35
+text = "Quit"
+
+[node name="Singleplayer" type="Button" parent="MainMenu" unique_id=648588680]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -267.5
+offset_top = -103.625
+offset_right = 267.5
+offset_bottom = -48.62503
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_wuni8")
+theme_override_font_sizes/font_size = 35
+text = "Singleplayer"
+
+[node name="Label" type="Label" parent="MainMenu" unique_id=1690595279]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -401.0
+offset_top = 91.245
+offset_right = 401.0
+offset_bottom = 252.245
+grow_horizontal = 2
+text = "Protocol Z"
+label_settings = SubResource("LabelSettings_r1ube")
+horizontal_alignment = 1
+
+[node name="Version ID" type="Label" parent="." unique_id=1990336356]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 811.0
+offset_top = 1052.0
+offset_right = 957.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+text = "Version 0.1B"
+label_settings = SubResource("LabelSettings_ox3ly")
+horizontal_alignment = 1
+
+[node name="QuitMenu" type="Control" parent="." unique_id=855066003 node_paths=PackedStringArray("pause_panel", "network_manager")]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("6_ox3ly")
+pause_panel = NodePath(".")
+network_manager = NodePath("..")
+
+[node name="MainPausePanel" type="Panel" parent="QuitMenu" unique_id=56719009]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -201.5
+offset_top = -350.0
+offset_right = 201.5
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sqe1x")
+
+[node name="MarginContainer" type="MarginContainer" parent="QuitMenu/MainPausePanel" unique_id=847850868]
+layout_mode = 0
+offset_right = 403.5
+offset_bottom = 700.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="QuitMenu/MainPausePanel/MarginContainer" unique_id=484733428]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer" unique_id=589307348]
+layout_mode = 2
+text = "PAUSED"
+label_settings = SubResource("LabelSettings_fxi6q")
+horizontal_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer" unique_id=388706296]
+layout_mode = 2
+
+[node name="ResumeButton" type="Button" parent="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer" unique_id=1889434150]
+layout_mode = 2
+theme = SubResource("Theme_56a3p")
+text = "Resume"
+
+[node name="VSeparator3" type="VSeparator" parent="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer" unique_id=1844834123]
+layout_mode = 2
+
+[node name="SettingsButton" type="Button" parent="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer" unique_id=1967760850]
+layout_mode = 2
+theme = SubResource("Theme_56a3p")
+text = "Settings"
+
+[node name="VSeparator4" type="VSeparator" parent="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer" unique_id=1955042908]
+layout_mode = 2
+
+[node name="BackToLobbyButton" type="Button" parent="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer" unique_id=777349669]
+layout_mode = 2
+theme = SubResource("Theme_56a3p")
+text = "Back To Lobby"
+
+[node name="VSeparator5" type="VSeparator" parent="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer" unique_id=71443161]
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer" unique_id=1712511538]
+layout_mode = 2
+theme = SubResource("Theme_56a3p")
+text = "Quit"
+
+[node name="VSeparator6" type="VSeparator" parent="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer" unique_id=56808116]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer" unique_id=1774891732]
+layout_mode = 2
+text = "Ping"
+label_settings = SubResource("LabelSettings_56a3p")
+horizontal_alignment = 1
+
+[node name="SettingsPanel" type="Panel" parent="QuitMenu" unique_id=420530428]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -201.5
+offset_top = -350.0
+offset_right = 201.5
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sqe1x")
+
+[node name="MarginContainer" type="MarginContainer" parent="QuitMenu/SettingsPanel" unique_id=50472816]
+layout_mode = 0
+offset_right = 403.5
+offset_bottom = 700.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="QuitMenu/SettingsPanel/MarginContainer" unique_id=1022719982]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="QuitMenu/SettingsPanel/MarginContainer/VBoxContainer" unique_id=878343839]
+layout_mode = 2
+text = "SETTINGS"
+label_settings = SubResource("LabelSettings_fxi6q")
+horizontal_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="QuitMenu/SettingsPanel/MarginContainer/VBoxContainer" unique_id=1659947491]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="QuitMenu/SettingsPanel/MarginContainer/VBoxContainer" unique_id=296595951]
+layout_mode = 2
+text = "NO  SETTINGS  YET"
+label_settings = SubResource("LabelSettings_sqe1x")
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="QuitMenu/SettingsPanel/MarginContainer/VBoxContainer" unique_id=1738282899]
+layout_mode = 2
+theme = SubResource("Theme_56a3p")
+text = "Back"
+
+[connection signal="pressed" from="UI/Lobby/ReadyButton" to="." method="_on_ready_button_pressed"]
+[connection signal="pressed" from="UI/Lobby/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="UI/Control/ConnectButton" to="." method="_on_connect_pressed"]
+[connection signal="pressed" from="UI/Control/HostButton" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="UI/Control/Close" to="MainMenu" method="_on_close_pressed"]
+[connection signal="pressed" from="MainMenu/Multiplayer" to="MainMenu" method="_on_multiplayer_pressed"]
+[connection signal="pressed" from="MainMenu/Quit" to="MainMenu" method="_on_quit_pressed"]
+[connection signal="pressed" from="MainMenu/Singleplayer" to="." method="_on_singleplayer_pressed"]
+[connection signal="pressed" from="MainMenu/Singleplayer" to="MainMenu" method="_on_singleplayer_pressed"]
+[connection signal="pressed" from="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer/ResumeButton" to="QuitMenu" method="_on_resume_pressed"]
+[connection signal="pressed" from="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer/SettingsButton" to="QuitMenu" method="_on_settings_pressed"]
+[connection signal="pressed" from="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer/BackToLobbyButton" to="QuitMenu" method="_on_back_to_lobby_pressed"]
+[connection signal="pressed" from="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer/QuitButton" to="QuitMenu" method="_on_quit_to_menu_pressed"]
+[connection signal="pressed" from="QuitMenu/SettingsPanel/MarginContainer/VBoxContainer/ResumeButton" to="QuitMenu" method="_on_back_button_pressed"]

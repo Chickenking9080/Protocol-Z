@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dijysbmltksvy"]
+
+[ext_resource type="PackedScene" uid="uid://bnvmxod828a1j" path="res://Models/raspberry.glb" id="1_nscya"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ow5ee"]
+height = 1.699707
+radius = 0.61572266
+
+[node name="raspberry_bush" type="Node3D" unique_id=2133913085]
+
+[node name="raspberry" parent="." unique_id=1734959641 instance=ExtResource("1_nscya")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="raspberry" unique_id=1802511662]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="raspberry/StaticBody3D" unique_id=282901295]
+transform = Transform3D(0.9999997, 0, 0, 0, 0.9999997, 0, 0, 0, 0.9999997, 0, 0.15014644, 0)
+shape = SubResource("CylinderShape3D_ow5ee")

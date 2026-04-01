@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bwe7s71onffen"]
+
+[ext_resource type="PackedScene" uid="uid://jvpbr7kyfb3f" path="res://Models/axe.glb" id="1_sykeo"]
+
+[node name="Node3D" type="Node3D" unique_id=1343986137]
+
+[node name="axe" parent="." unique_id=1304597712 instance=ExtResource("1_sykeo")]

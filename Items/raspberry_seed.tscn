@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bk4d5y8mu642w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5lt6q"]
+albedo_color = Color(0.37288982, 0.2193366, 4.813075e-08, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_5lt6q"]
+material = SubResource("StandardMaterial3D_5lt6q")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_juwwv"]
+
+[node name="RigidBody3D" type="RigidBody3D" unique_id=1735498697 groups=["pickable", "raspberry_seed"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1569382622 groups=["raspberry_seed"]]
+mesh = SubResource("SphereMesh_5lt6q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1190616779 groups=["raspberry_seed"]]
+shape = SubResource("SphereShape3D_juwwv")
