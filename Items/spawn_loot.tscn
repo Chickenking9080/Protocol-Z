@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bj47iwdkief1e"]
+
+[ext_resource type="Script" uid="uid://cheakf76s22iy" path="res://spawn_loot.gd" id="1_xwrut"]
+[ext_resource type="PackedScene" uid="uid://lxxiah7f014x" path="res://rock.tscn" id="2_cf6oc"]
+[ext_resource type="PackedScene" uid="uid://bpxs3wwfwjg4e" path="res://Items/food.tscn" id="3_2ddwv"]
+[ext_resource type="PackedScene" uid="uid://b5lbv5ds5knj5" path="res://Items/screw.tscn" id="4_fpauk"]
+[ext_resource type="PackedScene" uid="uid://dbae1p6di7sb" path="res://Items/water.tscn" id="5_qw4su"]
+[ext_resource type="PackedScene" uid="uid://bk4d5y8mu642w" path="res://Items/raspberry_seed.tscn" id="6_dy824"]
+
+[node name="Spawn_Loot" type="Node3D" unique_id=1072897399]
+script = ExtResource("1_xwrut")
+loot_scenes = Array[PackedScene]([ExtResource("2_cf6oc"), ExtResource("3_2ddwv"), ExtResource("4_fpauk"), ExtResource("5_qw4su"), ExtResource("6_dy824")])
+spawn_interval = 10.0
+spawn_radius = 10.0
+spawn_height = 0.0
+max_loot_spawns = 20

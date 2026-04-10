@@ -8,6 +8,7 @@ const SERVER_TIMEOUT = 6.0
 const RECONNECT_ATTEMPTS = 3
 const RECONNECT_DELAY = 2.0
 const USERNAME_SAVE_PATH = "user://username.txt"
+const DEFAULT_SINGLEPLAYER_USERNAME = "Player"
 
 var max_players := 1
 var connected_players: Array = []
@@ -16,7 +17,7 @@ var player_pings := {}
 var my_username := ""
 var paused_players := {}
 
-# ── NEW: Ready-up system ──────────────────────────────────────────────────────
+
 var players_ready := {}  # tracks who is ready to start
 
 var ping_timer := 0.0
@@ -46,6 +47,11 @@ var chat_open := false
 # ── ready ─────────────────────────────────────────────────────────────────────
 
 func _ready():
+	if OS.has_feature("web"):
+		apply_web_low_settings()
+	if OS.has_feature("web"):
+		for node in get_tree().get_nodes_in_group("web_disable"):
+			node.visible = false
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	get_tree().paused = true
 	multiplayer.server_relay = false
@@ -69,6 +75,13 @@ func _process(delta):
 		_poll_ping(delta)
 	elif udp_listen != null:
 		_poll_listen(delta)
+
+# -- Optimisation --------------------------------------------------------------
+func apply_web_low_settings():
+	get_viewport().scaling_3d_scale = 0.7
+	ProjectSettings.set_setting("rendering/anti_aliasing/quality/msaa_3d", 0)
+	ProjectSettings.set_setting("rendering/environment/glow_enabled", false)
+	ProjectSettings.set_setting("rendering/environment/ssao_enabled", false)
 
 
 # ── username save/load ────────────────────────────────────────────────────────
@@ -166,7 +179,7 @@ func _update_lobby_ui():
 	_update_start_button()
 
 
-# ── NEW: Ready-up system ─────────────────────────────────────��────────────────
+# ── NEW: Ready-up system ─────────────────────────────────────────────────────
 
 func _update_start_button():
 	if not is_instance_valid($UI/Lobby/StartButton):
@@ -241,10 +254,8 @@ func _on_host_pressed():
 	_update_lobby_ui()
 
 func _on_singleplayer_pressed():
-	if not _validate_username():
-		return
-
-	my_username = get_username()
+	# Use default username for singleplayer
+	my_username = DEFAULT_SINGLEPLAYER_USERNAME
 	_save_username(my_username)
 
 	var peer = ENetMultiplayerPeer.new()
@@ -451,7 +462,7 @@ func _arr_to_vec3(a: Array) -> Vector3:
 	return Vector3(a[0], a[1], a[2])
 
 
-# ── rpcs ───���──────────────────────────────────────────────────────────────────
+# ── rpcs ───────────────────────────────────────────────────────────────────────
 
 @rpc("any_peer")
 func send_username(name: String):
@@ -468,6 +479,7 @@ func sync_player_data(players: Array, usernames: Dictionary, pings: Dictionary, 
 	max_players = max_p
 	players_ready = ready
 	_update_lobby_ui()
+	update_all_name_labels()  # ← ADD THIS LINE
 
 @rpc("call_local")
 func start_game():

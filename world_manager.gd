@@ -37,7 +37,7 @@ var _thunder_timer    : float = 0.0
 var _next_thunder     : float = 0.0
 var _lightning_active : float = 0.0
 
-var _sync_timer : float = 0.0
+var _sync_timer  : float = 0.0
 var _target_time : float = 0.0
 
 func _ready() -> void:
@@ -55,13 +55,21 @@ func _ready() -> void:
 		sun.rotation_degrees.y = 20.0
 
 	if moon:
-		moon.sky_mode           = DirectionalLight3D.SKY_MODE_LIGHT_AND_SKY
+		moon.sky_mode           = DirectionalLight3D.SKY_MODE_LIGHT_ONLY
 		moon.shadow_enabled     = false
 		moon.light_color        = Color(0.55, 0.65, 0.9)
 		moon.light_energy       = 0.0
 		moon.rotation_degrees.y = 160.0
 
 	_next_thunder = randf_range(thunder_min_interval, thunder_max_interval)
+	
+	if OS.has_feature("web"):
+		apply_web_low_settings()
+
+func apply_web_low_settings():
+	sun.shadow_enabled = false
+	world_environment.environment.ssr_enabled = false
+	Engine.physics_ticks_per_second = 30
 
 func _process(delta: float) -> void:
 	if multiplayer.is_server():
@@ -96,11 +104,22 @@ func _update_visuals(delta: float) -> void:
 	sun.light_color  = sunset_glow.lerp(Color.WHITE, daylight_factor)
 
 	if moon:
-		moon.rotation_degrees.x = x_rot + 180.0
+		moon.rotation_degrees.x = x_rot - 180.0
 
-		var moon_height = sin(deg_to_rad(moon.rotation_degrees.x))
-		moon.visible    = moon_height > 0.0
-		moon.light_energy = clamp(moon_height, 0.0, 1.0) * 0.12
+		var moon_height = sun_height - 180
+		moon.visible = moon_height > 0.0
+		moon.light_energy = clamp(moon_height, 0.0, 1.0) * 1.0
+
+		if moon_height > 0.0:
+			sun.visible = false
+			moon.visible = true
+			moon.sky_mode = DirectionalLight3D.SKY_MODE_LIGHT_AND_SKY
+			sun.sky_mode  = DirectionalLight3D.SKY_MODE_LIGHT_ONLY
+		else:
+			moon.visible = false
+			sun.visible = true
+			moon.sky_mode = DirectionalLight3D.SKY_MODE_LIGHT_ONLY
+			sun.sky_mode  = DirectionalLight3D.SKY_MODE_LIGHT_AND_SKY
 
 	if _sky_mat:
 		_sky_mat.sky_top_color = sky_top_night.lerp(sky_top_day, daylight_factor)

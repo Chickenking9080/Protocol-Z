@@ -42,6 +42,12 @@ var thirst = 100
 @export var lamp_scene: PackedScene
 @export var lamp_ghost_scene: PackedScene
 
+@export var wall_scene: PackedScene
+@export var wall_ghost_scene: PackedScene
+
+@export var floor_scene: PackedScene
+@export var floor_ghost_scene: PackedScene
+
 # --- Structure Registry ---
 # Populated in _ready(). Each entry: { "ghost": PackedScene, "scene": PackedScene, "requires_item": String }
 # "requires_item" is optional — if set, that inventory item is consumed on placement.
@@ -104,6 +110,8 @@ func _ready():
 	_register_structure("tent",           tent_ghost_scene,           tent_scene)
 	_register_structure("raspberry_bush", raspberry_bush_ghost_scene, raspberry_bush_scene)
 	_register_structure("lamp",           lamp_ghost_scene,           lamp_scene)
+	_register_structure("wall",           wall_ghost_scene,           wall_scene)
+	_register_structure("floor",           floor_ghost_scene,           floor_scene)
 
 	if inventory_menu:
 		inventory_menu.hide()
@@ -146,7 +154,11 @@ func _input(event):
 
 	if is_menu_open:
 		return
+	# 👇 mouse capture (web + desktop)
+	if event is InputEventMouseButton and event.pressed:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+	# 👇 camera movement (BOTH)
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
 		camera.rotate_x(deg_to_rad(-event.relative.y * mouse_sensitivity))
@@ -174,9 +186,19 @@ func _input(event):
 
 	if Input.is_action_just_pressed("run"):
 		SPEED = 10
+		camera.fov = 70
 	if Input.is_action_just_released("run"):
 		SPEED = 5
-
+		camera.fov = 64.4
+	if Input.is_action_just_pressed("2"):
+		mode = "AXE"
+		_update_mode_visuals()
+	if Input.is_action_just_pressed("1"):
+		mode = "HANDS"
+		_update_mode_visuals()
+	if Input.is_action_just_pressed("3"):
+		mode = "TORCH"
+		_update_mode_visuals()
 # --- MOVEMENT ---
 
 func _physics_process(delta):
@@ -315,6 +337,8 @@ func _on_craft_bridge_button_pressed():         _on_build_button_pressed("bridge
 func _on_craft_tent_button_pressed():           _on_build_button_pressed("tent")
 func _on_craft_raspberry_bush_button_pressed(): _on_build_button_pressed("raspberry_bush")
 func _on_craft_lamp_button_pressed():           _on_build_button_pressed("lamp")
+func _on_craft_wall_button_pressed():           _on_build_button_pressed("wall")
+func _on_craft_floor_button_pressed():           _on_build_button_pressed("floor")
 
 # --- BUILDING ---
 
@@ -334,7 +358,7 @@ func update_ghost_position():
 	ray2.add_exception(self)
 	if ray2.is_colliding():
 		var p = ray2.get_collision_point()
-		p.y = floor(p.y * 2.0) / 2.0
+		p.y = floor(p.y * 0) / 0
 		current_ghost.global_position = p
 	else:
 		current_ghost.global_position = camera.global_position - camera.global_transform.basis.z * 5.0
@@ -480,7 +504,6 @@ func spawn_structure_blueprint(structure_key: String, pos: Vector3, rot: Vector3
 	level.add_child(blueprint)
 	blueprint.global_position = pos
 	blueprint.global_rotation = rot
-	blueprint.global_position.y += 0.25
 
 # --- MISC ---
 

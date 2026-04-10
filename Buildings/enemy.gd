@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 enum State { WANDER, CHASE }
-@export var current_state = State.WANDER #this is synced bc it will let the clients know what the ai should be doing
+@export var current_state = State.WANDER
 @onready var mesh = $zombie
 @onready var collider = $CollisionShape3D
 @export var speed: float = 3.0
@@ -14,28 +14,36 @@ var wander_target: Vector3
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var particles = $GPUParticles3D
 
+var is_dead: bool = false
+var last_state: State = State.WANDER
+var last_damage_time: float = 0.0
+var damage_cooldown: float = 0.1
+
 func damage(amount: int):
+	if Time.get_ticks_msec() - last_damage_time < damage_cooldown * 1000:
+		return
+	last_damage_time = Time.get_ticks_msec()
 	rpc_id(1, "server_damage", amount)
 
 
 func _ready():
 	if not is_multiplayer_authority():
-		set_physics_process(false) #stop logic on clients
+		set_physics_process(false)
 		return
 		
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
 	_pick_random_wander_target()
+	anim.play("Walk")
+	$Timer.wait_time = 1.0
+	$Timer2.wait_time = 0.2
 
 func _physics_process(_delta):
-	#double check we are the server if not dont do this crap, let the server sync it to you
 	if not is_multiplayer_authority(): return
 
 
 func _pick_random_wander_target():
 	var random_offset = Vector3(randf_range(-10, 10), 0, randf_range(-10, 10))
 	wander_target = global_position + random_offset
-
-# signals to set it to chase or not chase
 
 func _on_area_3d_body_entered(body):
 	if not is_multiplayer_authority(): return
@@ -57,16 +65,18 @@ func _on_velocity_computed(safe_velocity: Vector3):
 
 @rpc("any_peer", "call_local")
 func server_damage(amount: int):
-	if not multiplayer.is_server():
+	if not multiplayer.is_server() or is_dead:
 		return
 		
 	health -= amount
 	particles.emitting = true
 	if health <= 0:
+		is_dead = true
 		rpc("kill_enemy")
 
 @rpc("any_peer", "call_local")
 func kill_enemy():
+	set_physics_process(false)
 	if mesh: mesh.visible = false
 	if collider: collider.set_deferred("disabled", true)
 	await get_tree().create_timer(1.0).timeout
@@ -74,17 +84,24 @@ func kill_enemy():
 
 
 func _on_timer_timeout() -> void:
+	if is_dead:
+		return
+		
 	match current_state:
 		State.WANDER:
-			anim.play("Walk")
-			anim.speed_scale = 2.5
+			if last_state != current_state:
+				anim.play("Walk")
+				anim.speed_scale = 2.5
+				last_state = current_state
 			if nav_agent.is_navigation_finished():
 				_pick_random_wander_target()
 			nav_agent.target_position = wander_target
 			
 		State.CHASE:
-			anim.play("run")
-			anim.speed_scale = 5
+			if last_state != current_state:
+				anim.play("run")
+				anim.speed_scale = 5
+				last_state = current_state
 			if is_instance_valid(target_node):
 				nav_agent.target_position = target_node.global_position
 			else:
@@ -97,7 +114,18 @@ func _on_timer_timeout() -> void:
 		nav_agent.set_velocity(new_velocity)
 
 
-
 func _on_timer_2_timeout() -> void:
-	if velocity.length() > 0.1:
-		look_at(global_position + velocity, Vector3.UP)
+	if is_dead:
+		return
+	
+	var look_target = global_position
+	
+	if current_state == State.CHASE and is_instance_valid(target_node):
+		look_target = target_node.global_position
+	elif velocity.length() > 0.1:
+		look_target = global_position + velocity
+	else:
+		look_target = global_position + (nav_agent.get_next_path_position() - global_position).normalized()
+	
+	if look_target != global_position:
+		look_at(look_target, Vector3.UP)

@@ -1,9 +1,23 @@
 [gd_scene format=3 uid="uid://boknivrt05den"]
 
 [ext_resource type="PackedScene" uid="uid://bnvmxod828a1j" path="res://Models/raspberry.glb" id="1_dtlie"]
+[ext_resource type="Script" uid="uid://r20sr70jc1b1" path="res://scripts/house_blueprint.gd" id="1_rhkv2"]
+[ext_resource type="PackedScene" uid="uid://dijysbmltksvy" path="res://Items/raspberry_bush_full.tscn" id="2_3llc5"]
 [ext_resource type="Material" uid="uid://b8d1kuqcuwnjk" path="res://Models/highlight.tres" id="2_dtlie"]
+[ext_resource type="FontFile" uid="uid://dnuoumjtjvhgb" path="res://ARCADECLASSIC.TTF" id="5_3llc5"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_23itv"]
+height = 1.4970703
+radius = 0.6621094
 
 [node name="raspberry_bush_ghost" type="Node3D" unique_id=1507487083]
+script = ExtResource("1_rhkv2")
+buildable_name = "Raspberry Bush"
+logs_needed = 0
+rocks_needed = 0
+raspberry_needed = 1
+finished_house = ExtResource("2_3llc5")
+raspberry_name = true
 
 [node name="raspberry" parent="." unique_id=1734959641 instance=ExtResource("1_dtlie")]
 
@@ -13,5 +27,16 @@ surface_material_override/0 = ExtResource("2_dtlie")
 [node name="Icosphere" parent="raspberry" index="1" unique_id=680671995]
 surface_material_override/0 = ExtResource("2_dtlie")
 surface_material_override/1 = ExtResource("2_dtlie")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1505705014]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=890880821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25146484, 0)
+shape = SubResource("CylinderShape3D_23itv")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=68918290]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5918416, 0.6905408)
+text = "monkey"
+font = ExtResource("5_3llc5")
 
 [editable path="raspberry"]

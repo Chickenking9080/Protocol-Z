@@ -75,7 +75,14 @@ size = Vector3(10.433838, 8.890137, 11.0896)
 [node name="HouseBlueprint" type="Node3D" unique_id=711142192]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
 script = ExtResource("1_0bejn")
+buildable_name = "House"
+logs_needed = 32
+rocks_needed = 6
+screws_needed = 20
 finished_house = ExtResource("2_lucc6")
+rocks_name = true
+logs_name = true
+screws_name = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2009762579]
 transform = Transform3D(5.051106, 0, 0, 0, 0.17464018, 0, 0, 0, 5.241577, 0, 0, 0)

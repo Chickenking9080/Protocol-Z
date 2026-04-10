@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://b5lbv5ds5knj5"]
+
+[ext_resource type="PackedScene" uid="uid://ceoncnpywcnx6" path="res://Models/screw.glb" id="1_w7tct"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vyec8"]
+height = 0.39178467
+radius = 0.044921875
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_w7tct"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="Screw" type="RigidBody3D" unique_id=930834686 groups=["Screws", "pickable", "placed_objects"]]
+
+[node name="screw" parent="." unique_id=1072522995 groups=["Screws", "placed_objects"] instance=ExtResource("1_w7tct")]
+transform = Transform3D(15.575, 0, 0, 0, 15.575, 0, 0, 0, 15.575, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1614539648 groups=["Screws", "placed_objects"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19125366, 0)
+shape = SubResource("CylinderShape3D_vyec8")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=693981616]
+replication_config = SubResource("SceneReplicationConfig_w7tct")

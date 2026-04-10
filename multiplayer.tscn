@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://dnuoumjtjvhgb" path="res://ARCADECLASSIC.TTF" id="3_wuni8"]
 [ext_resource type="Theme" uid="uid://dban654qiu5pj" path="res://font_menu.tres" id="5_r1ube"]
 [ext_resource type="Script" uid="uid://cfij34riayc56" path="res://quit_menu.gd" id="6_ox3ly"]
+[ext_resource type="Script" uid="uid://c5dvn22o8dtps" path="res://settings_panel.gd" id="7_sqe1x"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wktud"]
 font = ExtResource("3_wuni8")
@@ -77,13 +78,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Lobby" type="Control" parent="UI" unique_id=218098478]
+[node name="Lobby" type="Control" parent="UI" unique_id=218098478 groups=["web_disable"]]
 visible = false
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 
-[node name="PlayerList" type="VBoxContainer" parent="UI/Lobby" unique_id=1909572121]
+[node name="PlayerList" type="VBoxContainer" parent="UI/Lobby" unique_id=1909572121 groups=["web_disable"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -97,7 +98,7 @@ offset_bottom = -88.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PlayerCount" type="Label" parent="UI/Lobby" unique_id=292724521]
+[node name="PlayerCount" type="Label" parent="UI/Lobby" unique_id=292724521 groups=["web_disable"]]
 layout_mode = 0
 offset_left = 891.0
 offset_top = 81.0
@@ -106,7 +107,7 @@ offset_bottom = 132.0
 text = "players"
 label_settings = SubResource("LabelSettings_wktud")
 
-[node name="ReadyButton" type="Button" parent="UI/Lobby" unique_id=396178217]
+[node name="ReadyButton" type="Button" parent="UI/Lobby" unique_id=396178217 groups=["web_disable"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -122,7 +123,7 @@ grow_vertical = 0
 theme = ExtResource("5_r1ube")
 text = "  Ready   To    Begin? "
 
-[node name="StartButton" type="Button" parent="UI/Lobby" unique_id=269762422]
+[node name="StartButton" type="Button" parent="UI/Lobby" unique_id=269762422 groups=["web_disable"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -139,12 +140,12 @@ theme = ExtResource("5_r1ube")
 disabled = true
 text = "Start Game"
 
-[node name="Control" type="Control" parent="UI" unique_id=1536579100]
+[node name="Control" type="Control" parent="UI" unique_id=1536579100 groups=["web_disable"]]
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 
-[node name="Username" type="LineEdit" parent="UI/Control" unique_id=2119105541]
+[node name="Username" type="LineEdit" parent="UI/Control" unique_id=2119105541 groups=["web_disable"]]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -159,12 +160,13 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_r1ube")
+text = "1"
 placeholder_text = "Enter Username"
 alignment = 1
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="Label3" type="Label" parent="UI/Control" unique_id=1914519731]
+[node name="Label3" type="Label" parent="UI/Control" unique_id=1914519731 groups=["web_disable"]]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -178,7 +180,7 @@ IF YOU ARE THE HOST ENTER AMOUNT OF PLAYERS AND PRESS HOST, SERVER WILL WAIT FOR
 label_settings = SubResource("LabelSettings_o4y1c")
 horizontal_alignment = 1
 
-[node name="ConnectButton" type="Button" parent="UI/Control" unique_id=1604766331]
+[node name="ConnectButton" type="Button" parent="UI/Control" unique_id=1604766331 groups=["web_disable"]]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -194,7 +196,7 @@ grow_vertical = 2
 theme = ExtResource("3_r1ube")
 text = "Connect"
 
-[node name="Remote" type="LineEdit" parent="UI/Control" unique_id=1932876242]
+[node name="Remote" type="LineEdit" parent="UI/Control" unique_id=1932876242 groups=["web_disable"]]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -215,7 +217,7 @@ alignment = 1
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="HostButton" type="Button" parent="UI/Control" unique_id=1873296305]
+[node name="HostButton" type="Button" parent="UI/Control" unique_id=1873296305 groups=["web_disable"]]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -231,7 +233,7 @@ grow_vertical = 2
 theme = ExtResource("3_r1ube")
 text = "Host"
 
-[node name="PlayerCount" type="LineEdit" parent="UI/Control" unique_id=1077564932]
+[node name="PlayerCount" type="LineEdit" parent="UI/Control" unique_id=1077564932 groups=["web_disable"]]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -251,14 +253,14 @@ alignment = 1
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="DiscoveredServers" type="VBoxContainer" parent="UI/Control" unique_id=2126435505]
+[node name="DiscoveredServers" type="VBoxContainer" parent="UI/Control" unique_id=2126435505 groups=["web_disable"]]
 layout_mode = 0
 offset_left = -2.0
 offset_top = -6.0
 offset_right = 399.0
 offset_bottom = 679.0
 
-[node name="Label" type="Label" parent="UI/Control" unique_id=1728735392]
+[node name="Label" type="Label" parent="UI/Control" unique_id=1728735392 groups=["web_disable"]]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -272,7 +274,7 @@ text = "hehe"
 label_settings = SubResource("LabelSettings_5bi2t")
 horizontal_alignment = 1
 
-[node name="Close" type="Button" parent="UI/Control" unique_id=1805040939]
+[node name="Close" type="Button" parent="UI/Control" unique_id=1805040939 groups=["web_disable"]]
 layout_mode = 0
 offset_left = 1513.0
 offset_top = 219.0
@@ -281,13 +283,13 @@ offset_bottom = 283.0
 theme = ExtResource("3_r1ube")
 text = "Close Menu"
 
-[node name="Chat" type="Control" parent="." unique_id=1388011216]
+[node name="Chat" type="Control" parent="." unique_id=1388011216 groups=["web_disable"]]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 432.0
 offset_bottom = 600.0
 
-[node name="Input" type="LineEdit" parent="Chat" unique_id=368273401]
+[node name="Input" type="LineEdit" parent="Chat" unique_id=368273401 groups=["web_disable"]]
 visible = false
 layout_mode = 0
 offset_top = 519.0
@@ -297,10 +299,16 @@ theme = ExtResource("3_r1ube")
 placeholder_text = "Type   Here"
 alignment = 1
 
-[node name="Log" type="VBoxContainer" parent="Chat" unique_id=693681846]
+[node name="Log" type="VBoxContainer" parent="Chat" unique_id=693681846 groups=["web_disable"]]
 layout_mode = 0
 offset_right = 367.0
 offset_bottom = 519.0
+
+[node name="SendButton" type="Button" parent="Chat" unique_id=1126341462 groups=["web_disable"]]
+visible = false
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
 
 [node name="MainMenu" type="Control" parent="." unique_id=560713890 node_paths=PackedStringArray("UI", "Menu", "MP")]
 layout_mode = 3
@@ -312,7 +320,7 @@ UI = NodePath("../UI")
 Menu = NodePath(".")
 MP = NodePath("../UI/Control")
 
-[node name="Multiplayer" type="Button" parent="MainMenu" unique_id=1592334375]
+[node name="Multiplayer" type="Button" parent="MainMenu" unique_id=1592334375 groups=["web_disable"]]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -448,7 +456,7 @@ text = "Settings"
 [node name="VSeparator4" type="VSeparator" parent="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer" unique_id=1955042908]
 layout_mode = 2
 
-[node name="BackToLobbyButton" type="Button" parent="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer" unique_id=777349669]
+[node name="BackToLobbyButton" type="Button" parent="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer" unique_id=777349669 groups=["web_disable"]]
 layout_mode = 2
 theme = SubResource("Theme_56a3p")
 text = "Back To Lobby"
@@ -470,7 +478,7 @@ text = "Ping"
 label_settings = SubResource("LabelSettings_56a3p")
 horizontal_alignment = 1
 
-[node name="SettingsPanel" type="Panel" parent="QuitMenu" unique_id=420530428]
+[node name="SettingsPanel" type="Panel" parent="QuitMenu" unique_id=420530428 groups=["SunManager"]]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -485,6 +493,7 @@ offset_bottom = 350.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_sqe1x")
+script = ExtResource("7_sqe1x")
 
 [node name="MarginContainer" type="MarginContainer" parent="QuitMenu/SettingsPanel" unique_id=50472816]
 layout_mode = 0
@@ -503,11 +512,22 @@ horizontal_alignment = 1
 [node name="VSeparator" type="VSeparator" parent="QuitMenu/SettingsPanel/MarginContainer/VBoxContainer" unique_id=1659947491]
 layout_mode = 2
 
+[node name="Shadows" type="CheckButton" parent="QuitMenu/SettingsPanel/MarginContainer/VBoxContainer" unique_id=472202800]
+layout_mode = 2
+theme = ExtResource("5_r1ube")
+text = "Shadows"
+
+[node name="renderscale" type="CheckButton" parent="QuitMenu/SettingsPanel/MarginContainer/VBoxContainer" unique_id=217417046]
+layout_mode = 2
+theme = ExtResource("5_r1ube")
+text = "Render Scale 0.7 "
+
 [node name="Label2" type="Label" parent="QuitMenu/SettingsPanel/MarginContainer/VBoxContainer" unique_id=296595951]
 layout_mode = 2
-text = "NO  SETTINGS  YET"
+text = "RENDER  SCALE  IS  A  LAST RESORT  FOR  PERFORMANCE"
 label_settings = SubResource("LabelSettings_sqe1x")
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="ResumeButton" type="Button" parent="QuitMenu/SettingsPanel/MarginContainer/VBoxContainer" unique_id=1738282899]
 layout_mode = 2
@@ -527,4 +547,6 @@ text = "Back"
 [connection signal="pressed" from="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer/SettingsButton" to="QuitMenu" method="_on_settings_pressed"]
 [connection signal="pressed" from="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer/BackToLobbyButton" to="QuitMenu" method="_on_back_to_lobby_pressed"]
 [connection signal="pressed" from="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer/QuitButton" to="QuitMenu" method="_on_quit_to_menu_pressed"]
+[connection signal="pressed" from="QuitMenu/SettingsPanel/MarginContainer/VBoxContainer/Shadows" to="QuitMenu/SettingsPanel" method="_on_shadows_pressed"]
+[connection signal="toggled" from="QuitMenu/SettingsPanel/MarginContainer/VBoxContainer/renderscale" to="QuitMenu/SettingsPanel" method="_on_renderscale_toggled"]
 [connection signal="pressed" from="QuitMenu/SettingsPanel/MarginContainer/VBoxContainer/ResumeButton" to="QuitMenu" method="_on_back_button_pressed"]

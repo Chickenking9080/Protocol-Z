@@ -143,15 +143,18 @@ func _on_resume_pressed() -> void:
 	_resume_game()
 
 func _on_settings_pressed() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	# Open settings menu (you can expand this)
 	if pause_panel and is_instance_valid(pause_panel.get_node_or_null("SettingsPanel")):
 		pause_panel.get_node("SettingsPanel").show()
 		pause_panel.get_node("MainPausePanel").hide()
 
 func _on_quit_to_menu_pressed() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().quit()
 
 func _on_back_button_pressed() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	if pause_panel and is_instance_valid(pause_panel.get_node_or_null("SettingsPanel")):
 		pause_panel.get_node("SettingsPanel").hide()
 		pause_panel.get_node("MainPausePanel").show()

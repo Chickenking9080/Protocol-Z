@@ -4,6 +4,9 @@ extends Control
 @export var Menu = Control
 @export var MP = Control
 
+func _physics_process(delta: float) -> void:
+	pass
+
 func _on_quit_pressed() -> void:
 	get_tree().quit()
 

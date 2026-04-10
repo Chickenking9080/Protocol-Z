@@ -49,6 +49,29 @@ _subresources={
 "use_external/fallback_path": "res://Models/glass.tres",
 "use_external/path": "uid://c2s7taoym6d45"
 }
+},
+"nodes": {
+"PATH:Cube ": {
+"import/skip_import": true
+},
+"PATH:Cube /StaticBody3D": {
+"import/skip_import": true
+},
+"PATH:Cube /StaticBody3D/CollisionShape3D": {
+"import/skip_import": true
+},
+"PATH:Cylinder ": {
+"import/skip_import": true
+},
+"PATH:Cylinder /StaticBody3D": {
+"import/skip_import": true
+},
+"PATH:Cylinder /StaticBody3D/CollisionShape3D": {
+"import/skip_import": true
+},
+"PATH:tree": {
+"import/skip_import": true
+}
 }
 }
 gltf/naming_version=2

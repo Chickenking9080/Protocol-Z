@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://3xnvhmpbbxa3"]
+
+[ext_resource type="Script" uid="uid://r20sr70jc1b1" path="res://scripts/house_blueprint.gd" id="1_3phkn"]
+[ext_resource type="PackedScene" uid="uid://tswehm0dy87v" path="res://Buildings/table.tscn" id="2_2v40m"]
+[ext_resource type="PackedScene" uid="uid://pn0dnd0itl17" path="res://Models/table.glb" id="3_emj4b"]
+[ext_resource type="Material" uid="uid://b8d1kuqcuwnjk" path="res://Models/highlight.tres" id="4_3kqu1"]
+[ext_resource type="FontFile" uid="uid://dnuoumjtjvhgb" path="res://ARCADECLASSIC.TTF" id="5_okq01"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ko4fi"]
+size = Vector3(4.2597046, 3.7612305, 7.2730713)
+
+[node name="Table_ghost" type="Node3D" unique_id=1832750845]
+transform = Transform3D(0.33, 0, 0, 0, 0.33, 0, 0, 0, 0.33, 0, 0, 0)
+script = ExtResource("1_3phkn")
+buildable_name = "Table"
+rocks_needed = 0
+screws_needed = 8
+finished_house = ExtResource("2_2v40m")
+logs_name = true
+screws_name = true
+
+[node name="table" parent="." unique_id=1859193656 instance=ExtResource("3_emj4b")]
+
+[node name="Cube" parent="table" index="0" unique_id=1286882512]
+surface_material_override/0 = ExtResource("4_3kqu1")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1796405078]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2.5130491, 0, 0)
+text = "Logs 0/5"
+font = ExtResource("5_okq01")
+font_size = 217
+
+[node name="Area3D" type="Area3D" parent="." unique_id=306539827]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1497688375]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008880615, -1.3806152, -0.008972168)
+shape = SubResource("BoxShape3D_ko4fi")
+
+[editable path="table"]

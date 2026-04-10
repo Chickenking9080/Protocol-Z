@@ -1,14 +1,22 @@
 extends Node3D
 
+@export var buildable_name = str("null")
 @export var logs_needed := 5
 @export var rocks_needed := 3
+@export var screws_needed := 0
+@export var raspberry_needed := 0
 @export var finished_house: PackedScene
-
+@export var rocks_name: bool = false
+@export var logs_name: bool = false
+@export var screws_name: bool = false
+@export var raspberry_name: bool = false
 @onready var area: Area3D = $Area3D
 @onready var label: Label3D = $Label3D
 var hehe = null
 var logs := 0
 var rocks := 0
+var screws := 0
+var raspberry := 0
 
 
 func _ready():
@@ -87,6 +95,18 @@ func process_material(body: Node):
 			added = true
 			print("Rock added:", rocks)
 
+	elif body.is_in_group("Screws"):
+		if screws < screws_needed:
+			screws += 1
+			added = true
+			print("Screw added:", screws)
+
+	elif body.is_in_group("raspberry_seed"):
+		if raspberry < raspberry_needed:
+			raspberry += 1
+			added = true
+			print("Raspberry added:", raspberry)
+
 	else:
 		print("Not a build material")
 		return
@@ -99,7 +119,7 @@ func process_material(body: Node):
 		update_progress.rpc(logs, rocks)
 
 
-	if logs >= logs_needed and rocks >= rocks_needed:
+	if logs >= logs_needed and rocks >= rocks_needed and screws >= screws_needed and raspberry >= raspberry_needed:
 
 		build_structure()
 
@@ -120,8 +140,16 @@ func update_progress(l:int, r:int):
 func update_label():
 
 	if label:
-		label.text = "House\nLogs %d/%d\nRocks %d/%d" % [logs, logs_needed, rocks, rocks_needed]
-
+		var lines = [buildable_name]
+		if logs_name == true:
+			lines.append("Logs %d/%d" % [logs, logs_needed])
+		if rocks_name == true:
+			lines.append("Rocks %d/%d" % [rocks, rocks_needed])
+		if screws_name == true:
+			lines.append("Screws %d/%d" % [screws, screws_needed])
+		if raspberry_name == true:
+			lines.append("Raspberry Seed %d/%d" % [raspberry, raspberry_needed])
+		label.text = "\n".join(lines)
 
 # -------------------------
 # BUILD HOUSE

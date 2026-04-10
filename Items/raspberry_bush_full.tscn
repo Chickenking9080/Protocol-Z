@@ -1,12 +1,19 @@
 [gd_scene format=3 uid="uid://dijysbmltksvy"]
 
 [ext_resource type="PackedScene" uid="uid://bnvmxod828a1j" path="res://Models/raspberry.glb" id="1_nscya"]
+[ext_resource type="Script" uid="uid://dieamxqhy6c2v" path="res://Items/grow.gd" id="1_ow5ee"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ow5ee"]
 height = 1.699707
 radius = 0.61572266
 
-[node name="raspberry_bush" type="Node3D" unique_id=2133913085]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ulvq"]
+albedo_color = Color(0.24705882, 0.2, 0.16078432, 1)
+
+[node name="raspberry_bush" type="Node3D" unique_id=2133913085 node_paths=PackedStringArray("mesh", "meshGROWN")]
+script = ExtResource("1_ow5ee")
+mesh = NodePath("CSGSphere3D")
+meshGROWN = NodePath("raspberry")
 
 [node name="raspberry" parent="." unique_id=1734959641 instance=ExtResource("1_nscya")]
 
@@ -15,3 +22,16 @@ radius = 0.61572266
 [node name="CollisionShape3D" type="CollisionShape3D" parent="raspberry/StaticBody3D" unique_id=282901295]
 transform = Transform3D(0.9999997, 0, 0, 0, 0.9999997, 0, 0, 0, 0.9999997, 0, 0.15014644, 0)
 shape = SubResource("CylinderShape3D_ow5ee")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=315999554]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0162133, 0)
+radius = 0.6
+radial_segments = 34
+rings = 7
+material = SubResource("StandardMaterial3D_3ulvq")
+
+[node name="Timer" type="Timer" parent="." unique_id=713054842]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

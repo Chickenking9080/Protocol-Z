@@ -8,20 +8,23 @@
 [ext_resource type="PackedScene" uid="uid://dsekbghvblcca" path="res://Buildings/house_blueprint.tscn" id="4_b26j0"]
 [ext_resource type="PackedScene" uid="uid://cswal1i6diiqm" path="res://Buildings/house_blueprintacctuallyputdown.tscn" id="4_n7ghd"]
 [ext_resource type="Texture2D" uid="uid://chqym1xnkvb8x" path="res://images/empty.svg" id="5_dw050"]
-[ext_resource type="PackedScene" uid="uid://dijysbmltksvy" path="res://Items/raspberry_bush_full.tscn" id="6_606se"]
 [ext_resource type="Texture2D" uid="uid://c4r78788ny1p0" path="res://images/axe.svg" id="6_b26j0"]
 [ext_resource type="PackedScene" uid="uid://bvsmacr025ci5" path="res://Models/campfire.glb" id="6_u1c27"]
+[ext_resource type="PackedScene" uid="uid://3xnvhmpbbxa3" path="res://Items/table_blueprint.tscn" id="7_7lmhl"]
 [ext_resource type="Texture2D" uid="uid://dsbtqn0gc6lga" path="res://images/log.svg" id="7_n7ghd"]
 [ext_resource type="PackedScene" uid="uid://boknivrt05den" path="res://Items/raspberry_bush_ghost.tscn" id="7_u1c27"]
 [ext_resource type="PackedScene" uid="uid://u1cab5fio1e5" path="res://Models/torch.glb" id="8_nvl01"]
 [ext_resource type="Material" uid="uid://cu2bcfk0h7shn" path="res://Models/black.tres" id="9_ivps1"]
+[ext_resource type="PackedScene" uid="uid://bdu4fog7rmua7" path="res://wallbuilt.tscn" id="9_jm5j8"]
+[ext_resource type="PackedScene" uid="uid://blnjcqh0o30lh" path="res://wallunbuilt.tscn" id="10_7hik5"]
+[ext_resource type="PackedScene" uid="uid://ll7ajn66dwcf" path="res://floorbuilt.tscn" id="11_qtqh7"]
+[ext_resource type="PackedScene" uid="uid://e0y71jpu7sdd" path="res://floorunbuilt.tscn" id="12_2wuci"]
 [ext_resource type="Shader" uid="uid://c87svpks21sy3" path="res://Models/player.gdshader" id="13_op7ga"]
 [ext_resource type="Script" uid="uid://cgrm6anltxaxs" path="res://scripts/fps_counter.gd" id="13_urp6f"]
 [ext_resource type="Script" uid="uid://cerxpooufqrbb" path="res://menu.gd" id="14_5tmop"]
 [ext_resource type="Script" uid="uid://bsoalm5lt4a8n" path="res://enable_animation.gd" id="14_7ahtn"]
 [ext_resource type="Texture2D" uid="uid://djthnkfpkw12c" path="res://images/house.svg" id="18_7ahtn"]
-[ext_resource type="Texture2D" uid="uid://uqw3yilkasf8" path="res://images/raspberry.svg" id="19_7lmhl"]
-[ext_resource type="Texture2D" uid="uid://dfmsnm1v1j3q6" path="res://images/campfire.svg" id="20_dx0e4"]
+[ext_resource type="FontFile" uid="uid://dnuoumjtjvhgb" path="res://ARCADECLASSIC.TTF" id="20_7ahtn"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_fb1vy"]
 properties/0/path = NodePath(".:player")
@@ -164,8 +167,14 @@ house_scene = ExtResource("4_n7ghd")
 house_ghost_scene = ExtResource("4_b26j0")
 campfire_scene = ExtResource("6_u1c27")
 campfire_ghost_scene = ExtResource("6_u1c27")
-raspberry_bush_scene = ExtResource("6_606se")
+table_scene = ExtResource("7_7lmhl")
+table_ghost_scene = ExtResource("7_7lmhl")
+raspberry_bush_scene = ExtResource("7_u1c27")
 raspberry_bush_ghost_scene = ExtResource("7_u1c27")
+wall_scene = ExtResource("9_jm5j8")
+wall_ghost_scene = ExtResource("10_7hik5")
+floor_scene = ExtResource("11_qtqh7")
+floor_ghost_scene = ExtResource("12_2wuci")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2132657549]
 replication_config = SubResource("SceneReplicationConfig_fb1vy")
@@ -183,7 +192,7 @@ mesh = SubResource("CapsuleMesh_jab13")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1564034191]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49330866, 0)
-fov = 64.3577
+fov = 64.4
 
 [node name="ColorRect" type="ColorRect" parent="Camera3D" unique_id=1866700970]
 material = SubResource("ShaderMaterial_q13i1")
@@ -196,19 +205,15 @@ anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 
-[node name="Button" type="Button" parent="Camera3D/Control" unique_id=1833268429]
-layout_mode = 0
-offset_left = 960.0
-offset_top = 540.0
-offset_right = 968.0
-offset_bottom = 548.0
-
 [node name="CenterContainer" type="CenterContainer" parent="Camera3D/Control" unique_id=2133828074]
 layout_mode = 0
 offset_left = -2.0
 offset_top = -3.0
 offset_right = 1918.0
 offset_bottom = 1077.0
+
+[node name="Button" type="Button" parent="Camera3D/Control/CenterContainer" unique_id=1833268429]
+layout_mode = 2
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=721431899]
 transform = Transform3D(14.24, 0, 0, 0, 14.23, 0, 0, 0, 1.005, 0, 0, -0.52293783)
@@ -218,7 +223,7 @@ collide_with_areas = true
 [node name="RayCast3D2" type="RayCast3D" parent="Camera3D" unique_id=109252643]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.53067786)
 target_position = Vector3(0, 0, -20)
-collision_mask = 8
+collision_mask = 520
 collide_with_areas = true
 
 [node name="axe" parent="Camera3D" unique_id=1343986137 instance=ExtResource("3_i3pqv")]
@@ -228,7 +233,7 @@ transform = Transform3D(0.59, 0, 0, 0, 0.483471, 0.33816534, 0, -0.33816546, 0.4
 libraries/ = SubResource("AnimationLibrary_bwjto")
 
 [node name="HoldPosition" type="Marker3D" parent="Camera3D" unique_id=374082839]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19203913, 0, -2.1197944)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5199933)
 
 [node name="torch" parent="Camera3D" unique_id=1921091909 instance=ExtResource("8_nvl01")]
 transform = Transform3D(0.33, 0, 0, 0, -1.4424758e-08, 0.33, 0, -0.33, -1.4424758e-08, 0.4521894, -0.062152207, -0.8721428)
@@ -402,42 +407,50 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_jm5j8")
 
-[node name="housebutton" type="Button" parent="UI/Building/Panel" unique_id=462489586]
-layout_mode = 0
-offset_left = 50.0
-offset_top = 50.0
-offset_right = 204.0
-offset_bottom = 204.0
-scale = Vector2(0.72, 0.72)
-icon = ExtResource("18_7ahtn")
-
-[node name="raspberrybutton" type="Button" parent="UI/Building/Panel" unique_id=742199377]
-layout_mode = 0
-offset_left = 200.0
-offset_top = 50.0
-offset_right = 311.0
-offset_bottom = 161.00005
-scale = Vector2(0.14, 0.14)
-icon = ExtResource("19_7lmhl")
-
-[node name="Button3" type="Button" parent="UI/Building/Panel" unique_id=2053332891]
-layout_mode = 0
-offset_left = 350.0
-offset_top = 50.5
-offset_right = 461.0
-offset_bottom = 161.50005
-scale = Vector2(0.14, 0.14)
-icon = ExtResource("20_dx0e4")
-
-[node name="Button4" type="Button" parent="UI/Building/Panel" unique_id=1949084852]
+[node name="tablebutton" type="Button" parent="UI/Building/Panel" unique_id=1949084852]
 layout_mode = 0
 offset_left = 500.0
 offset_top = 50.5
 offset_right = 611.001
 offset_bottom = 161.50005
-icon = ExtResource("6_b26j0")
+theme_override_fonts/font = ExtResource("20_7ahtn")
+theme_override_font_sizes/font_size = 31
+text = "Table"
 
-[node name="Button5" type="Button" parent="UI/Building/Panel" unique_id=1933510351]
+[node name="campfirebutton" type="Button" parent="UI/Building/Panel" unique_id=136281889]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 50.5
+offset_right = 461.00098
+offset_bottom = 161.50005
+theme_override_fonts/font = ExtResource("20_7ahtn")
+theme_override_font_sizes/font_size = 23
+text = "Campfire"
+
+[node name="Raspberrybutton" type="Button" parent="UI/Building/Panel" unique_id=2056773463]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 50.5
+offset_right = 311.00107
+offset_bottom = 161.50005
+theme_override_fonts/font = ExtResource("20_7ahtn")
+theme_override_font_sizes/font_size = 21
+text = "Raspberry
+Bush
+(GROWS)"
+
+[node name="housebutton" type="Button" parent="UI/Building/Panel" unique_id=1391416725]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 50.5
+offset_right = 161.00107
+offset_bottom = 161.50005
+theme_override_fonts/font = ExtResource("20_7ahtn")
+theme_override_font_sizes/font_size = 32
+text = "House"
+
+[node name="bedbutton" type="Button" parent="UI/Building/Panel" unique_id=1933510351]
+visible = false
 layout_mode = 0
 offset_left = 652.0
 offset_top = 50.5
@@ -445,7 +458,8 @@ offset_right = 763.0
 offset_bottom = 161.50005
 icon = ExtResource("6_b26j0")
 
-[node name="Button6" type="Button" parent="UI/Building/Panel" unique_id=770534750]
+[node name="tentbutton" type="Button" parent="UI/Building/Panel" unique_id=770534750]
+visible = false
 layout_mode = 0
 offset_left = 802.0
 offset_top = 50.5
@@ -453,29 +467,40 @@ offset_right = 913.0
 offset_bottom = 161.50005
 icon = ExtResource("6_b26j0")
 
-[node name="Button7" type="Button" parent="UI/Building/Panel" unique_id=1974642386]
+[node name="wallbutton" type="Button" parent="UI/Building/Panel" unique_id=1974642386]
 layout_mode = 0
 offset_left = 952.0
 offset_top = 51.0
 offset_right = 1063.0
 offset_bottom = 162.00005
-icon = ExtResource("6_b26j0")
+text = "Wall"
 
-[node name="Button8" type="Button" parent="UI/Building/Panel" unique_id=414146867]
+[node name="floorbutton" type="Button" parent="UI/Building/Panel" unique_id=414146867]
 layout_mode = 0
 offset_left = 1102.0
 offset_top = 51.0
 offset_right = 1213.001
 offset_bottom = 162.00005
-icon = ExtResource("6_b26j0")
+text = "Floor"
 
-[node name="Button9" type="Button" parent="UI/Building/Panel" unique_id=1301926563]
+[node name="bridgebutton" type="Button" parent="UI/Building/Panel" unique_id=1301926563]
+visible = false
 layout_mode = 0
 offset_left = 1250.0
 offset_top = 51.0
 offset_right = 1361.001
 offset_bottom = 162.00005
 icon = ExtResource("6_b26j0")
+
+[node name="lampbutton" type="Button" parent="UI/Building/Panel" unique_id=1350133334]
+visible = false
+layout_mode = 0
+offset_left = 50.0
+offset_top = 200.0
+offset_right = 204.0
+offset_bottom = 354.0
+scale = Vector2(0.72, 0.72)
+icon = ExtResource("18_7ahtn")
 
 [node name="close" type="Button" parent="UI/Building/Panel" unique_id=731685578]
 layout_mode = 0
@@ -511,10 +536,26 @@ script = ExtResource("13_urp6f")
 [connection signal="pressed" from="UI/InventoryMenu/VBox/WaterButton" to="." method="drink_water"]
 [connection signal="pressed" from="UI/InventoryMenu/VBox/FoodButton" to="." method="_on_food_button_pressed"]
 [connection signal="pressed" from="UI/InventoryMenu/buildingmenu" to="UI" method="_on_buildingmenu_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/tablebutton" to="." method="_on_craft_table_button_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/tablebutton" to="UI" method="_on_buildbutton_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/campfirebutton" to="." method="_on_craft_campfire_button_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/campfirebutton" to="UI" method="_on_buildbutton_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/Raspberrybutton" to="." method="_on_craft_raspberry_bush_button_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/Raspberrybutton" to="UI" method="_on_buildbutton_pressed"]
 [connection signal="pressed" from="UI/Building/Panel/housebutton" to="." method="_on_craft_house_button_pressed"]
 [connection signal="pressed" from="UI/Building/Panel/housebutton" to="UI" method="_on_buildbutton_pressed"]
-[connection signal="pressed" from="UI/Building/Panel/raspberrybutton" to="." method="_on_craft_raspberry_bush_button_pressed"]
-[connection signal="pressed" from="UI/Building/Panel/raspberrybutton" to="UI" method="_on_buildbutton_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/bedbutton" to="." method="_on_craft_bed_button_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/bedbutton" to="UI" method="_on_buildbutton_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/tentbutton" to="." method="_on_craft_tent_button_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/tentbutton" to="UI" method="_on_buildbutton_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/wallbutton" to="." method="_on_craft_wall_button_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/wallbutton" to="UI" method="_on_buildbutton_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/floorbutton" to="." method="_on_craft_floor_button_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/floorbutton" to="UI" method="_on_buildbutton_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/bridgebutton" to="." method="_on_craft_bridge_button_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/bridgebutton" to="UI" method="_on_buildbutton_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/lampbutton" to="." method="_on_craft_lamp_button_pressed"]
+[connection signal="pressed" from="UI/Building/Panel/lampbutton" to="UI" method="_on_buildbutton_pressed"]
 [connection signal="pressed" from="UI/Building/Panel/close" to="UI" method="_on_close_pressed"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
