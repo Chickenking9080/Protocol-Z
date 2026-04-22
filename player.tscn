@@ -200,6 +200,7 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 
 [node name="Control" type="Control" parent="Camera3D" unique_id=270330512]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
@@ -255,6 +256,7 @@ script = ExtResource("14_7ahtn")
 libraries/ = SubResource("AnimationLibrary_7lmhl")
 
 [node name="Control2" type="Control" parent="Camera3D" unique_id=417732959]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
@@ -310,6 +312,7 @@ text = "You Ded"
 label_settings = SubResource("LabelSettings_ivps1")
 
 [node name="UI" type="Control" parent="." unique_id=2041218705]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
