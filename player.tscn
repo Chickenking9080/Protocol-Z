@@ -9,21 +9,21 @@
 [ext_resource type="PackedScene" uid="uid://cswal1i6diiqm" path="res://Buildings/house_blueprintacctuallyputdown.tscn" id="4_n7ghd"]
 [ext_resource type="Texture2D" uid="uid://chqym1xnkvb8x" path="res://images/empty.svg" id="5_dw050"]
 [ext_resource type="Texture2D" uid="uid://c4r78788ny1p0" path="res://images/axe.svg" id="6_b26j0"]
-[ext_resource type="PackedScene" uid="uid://bvsmacr025ci5" path="res://Models/campfire.glb" id="6_u1c27"]
+[ext_resource type="PackedScene" uid="uid://bfxf7cl3mdgkf" path="res://campfire_ghost.tscn" id="6_dx0e4"]
 [ext_resource type="PackedScene" uid="uid://3xnvhmpbbxa3" path="res://Items/table_blueprint.tscn" id="7_7lmhl"]
 [ext_resource type="Texture2D" uid="uid://dsbtqn0gc6lga" path="res://images/log.svg" id="7_n7ghd"]
 [ext_resource type="PackedScene" uid="uid://boknivrt05den" path="res://Items/raspberry_bush_ghost.tscn" id="7_u1c27"]
+[ext_resource type="PackedScene" uid="uid://cr7hl6n61e7e1" path="res://bed_ghost.tscn" id="8_jm5j8"]
 [ext_resource type="PackedScene" uid="uid://u1cab5fio1e5" path="res://Models/torch.glb" id="8_nvl01"]
 [ext_resource type="Material" uid="uid://cu2bcfk0h7shn" path="res://Models/black.tres" id="9_ivps1"]
-[ext_resource type="PackedScene" uid="uid://bdu4fog7rmua7" path="res://wallbuilt.tscn" id="9_jm5j8"]
 [ext_resource type="PackedScene" uid="uid://blnjcqh0o30lh" path="res://wallunbuilt.tscn" id="10_7hik5"]
-[ext_resource type="PackedScene" uid="uid://ll7ajn66dwcf" path="res://floorbuilt.tscn" id="11_qtqh7"]
 [ext_resource type="PackedScene" uid="uid://e0y71jpu7sdd" path="res://floorunbuilt.tscn" id="12_2wuci"]
 [ext_resource type="Shader" uid="uid://c87svpks21sy3" path="res://Models/player.gdshader" id="13_op7ga"]
 [ext_resource type="Script" uid="uid://cgrm6anltxaxs" path="res://scripts/fps_counter.gd" id="13_urp6f"]
 [ext_resource type="Script" uid="uid://cerxpooufqrbb" path="res://menu.gd" id="14_5tmop"]
 [ext_resource type="Script" uid="uid://bsoalm5lt4a8n" path="res://enable_animation.gd" id="14_7ahtn"]
 [ext_resource type="Texture2D" uid="uid://djthnkfpkw12c" path="res://images/house.svg" id="18_7ahtn"]
+[ext_resource type="LabelSettings" uid="uid://uerigaus0sen" path="res://pixelsettings.tres" id="18_jm5j8"]
 [ext_resource type="FontFile" uid="uid://dnuoumjtjvhgb" path="res://ARCADECLASSIC.TTF" id="20_7ahtn"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_fb1vy"]
@@ -165,15 +165,17 @@ log_scene = ExtResource("2_b26j0")
 rock_scene = ExtResource("3_b26j0")
 house_scene = ExtResource("4_n7ghd")
 house_ghost_scene = ExtResource("4_b26j0")
-campfire_scene = ExtResource("6_u1c27")
-campfire_ghost_scene = ExtResource("6_u1c27")
+campfire_scene = ExtResource("6_dx0e4")
+campfire_ghost_scene = ExtResource("6_dx0e4")
 table_scene = ExtResource("7_7lmhl")
 table_ghost_scene = ExtResource("7_7lmhl")
+bed_scene = ExtResource("8_jm5j8")
+bed_ghost_scene = ExtResource("8_jm5j8")
 raspberry_bush_scene = ExtResource("7_u1c27")
 raspberry_bush_ghost_scene = ExtResource("7_u1c27")
-wall_scene = ExtResource("9_jm5j8")
+wall_scene = ExtResource("10_7hik5")
 wall_ghost_scene = ExtResource("10_7hik5")
-floor_scene = ExtResource("11_qtqh7")
+floor_scene = ExtResource("12_2wuci")
 floor_ghost_scene = ExtResource("12_2wuci")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2132657549]
@@ -264,23 +266,47 @@ offset_bottom = 1080.0
 
 [node name="Health" type="ProgressBar" parent="Camera3D/Control2" unique_id=1090598400]
 layout_mode = 0
-offset_right = 240.0
+offset_left = 97.0
+offset_right = 337.0
 offset_bottom = 27.0
 show_percentage = false
 
+[node name="Label" type="Label" parent="Camera3D/Control2/Health" unique_id=2049487868]
+layout_mode = 0
+offset_left = -91.0
+offset_bottom = 30.0
+text = "Health:"
+label_settings = ExtResource("18_jm5j8")
+
 [node name="Thirst" type="ProgressBar" parent="Camera3D/Control2" unique_id=1787382174]
 layout_mode = 0
+offset_left = 97.0
 offset_top = 40.0
-offset_right = 240.0
+offset_right = 337.0
 offset_bottom = 67.0
 show_percentage = false
 
+[node name="Label" type="Label" parent="Camera3D/Control2/Thirst" unique_id=1466606654]
+layout_mode = 0
+offset_left = -91.0
+offset_bottom = 30.0
+text = "Thirst:"
+label_settings = ExtResource("18_jm5j8")
+
 [node name="Hunger" type="ProgressBar" parent="Camera3D/Control2" unique_id=1234023594]
 layout_mode = 0
+offset_left = 97.0
 offset_top = 80.0
-offset_right = 240.0
+offset_right = 337.0
 offset_bottom = 107.0
 show_percentage = false
+
+[node name="Label" type="Label" parent="Camera3D/Control2/Hunger" unique_id=35206706]
+layout_mode = 0
+offset_left = -91.0
+offset_bottom = 30.0
+text = "Hunger:"
+label_settings = ExtResource("18_jm5j8")
 
 [node name="Control3" type="Control" parent="Camera3D" unique_id=10322414]
 visible = false
@@ -453,7 +479,6 @@ theme_override_font_sizes/font_size = 32
 text = "House"
 
 [node name="bedbutton" type="Button" parent="UI/Building/Panel" unique_id=1933510351]
-visible = false
 layout_mode = 0
 offset_left = 652.0
 offset_top = 50.5

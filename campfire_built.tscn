@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://dj7776tm61fkj"]
+
+[ext_resource type="PackedScene" uid="uid://bvsmacr025ci5" path="res://Models/campfire.glb" id="1_kkf13"]
+[ext_resource type="Shader" uid="uid://cpx5vse23c7a2" path="res://fire.gdshader" id="2_il6tr"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_il6tr"]
+height = 3.9541016
+radius = 1.7475586
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_il6tr"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_86oyu"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_il6tr")
+seamless = true
+in_3d_space = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_86oyu"]
+render_priority = 0
+shader = ExtResource("2_il6tr")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_86oyu")
+shader_parameter/root_color = Color(1, 0.75, 0.3, 1)
+shader_parameter/tip_color = Color(1, 0.03, 0.001, 1)
+shader_parameter/fire_alpha = 1.0
+shader_parameter/fire_speed = Vector2(0, 1)
+shader_parameter/fire_aperture = 0.22
+
+[sub_resource type="QuadMesh" id="QuadMesh_da5kv"]
+material = SubResource("ShaderMaterial_86oyu")
+size = Vector2(2.205, 2.325)
+
+[node name="campfire_built" type="Node3D" unique_id=1773492012]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="campfire" parent="." unique_id=463990073 instance=ExtResource("1_kkf13")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="campfire" unique_id=1802950422]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="campfire/StaticBody3D" unique_id=1106300990]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9770508, 0)
+shape = SubResource("CylinderShape3D_il6tr")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=18218797]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.4109578, 0)
+light_color = Color(1, 0.627451, 0, 1)
+light_energy = 4.168
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2109119305]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50977767, 0)
+mesh = SubResource("QuadMesh_da5kv")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=422074585]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.50977767, 0)
+mesh = SubResource("QuadMesh_da5kv")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1493031616]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.50977767, 0)
+mesh = SubResource("QuadMesh_da5kv")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=2071450515]
+transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 0, 0.50977767, 0)
+mesh = SubResource("QuadMesh_da5kv")

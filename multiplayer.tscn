@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dqnwtjo1731tv" path="res://menu_manager.gd" id="2_5bi2t"]
 [ext_resource type="Theme" uid="uid://bsjw7wausmdqb" path="res://font_menu_inputs.tres" id="3_r1ube"]
 [ext_resource type="FontFile" uid="uid://dnuoumjtjvhgb" path="res://ARCADECLASSIC.TTF" id="3_wuni8"]
+[ext_resource type="LabelSettings" uid="uid://uerigaus0sen" path="res://pixelsettings.tres" id="5_fxi6q"]
 [ext_resource type="Theme" uid="uid://dban654qiu5pj" path="res://font_menu.tres" id="5_r1ube"]
 [ext_resource type="Script" uid="uid://cfij34riayc56" path="res://quit_menu.gd" id="6_ox3ly"]
 [ext_resource type="Script" uid="uid://c5dvn22o8dtps" path="res://settings_panel.gd" id="7_sqe1x"]
@@ -11,11 +12,6 @@
 [sub_resource type="LabelSettings" id="LabelSettings_wktud"]
 font = ExtResource("3_wuni8")
 font_size = 37
-
-[sub_resource type="LabelSettings" id="LabelSettings_o4y1c"]
-font = ExtResource("3_wuni8")
-font_size = 25
-shadow_size = 6
 
 [sub_resource type="LabelSettings" id="LabelSettings_5bi2t"]
 font = ExtResource("3_wuni8")
@@ -177,7 +173,7 @@ offset_bottom = 91.0
 grow_horizontal = 2
 text = "LOCAL MULTIPLAYER ONLY! ENTER HOSTS IP ADDRESS AND CONNECT 
 IF YOU ARE THE HOST ENTER AMOUNT OF PLAYERS AND PRESS HOST, SERVER WILL WAIT FOR ALL PLAYERS TO BE IN TO BEGIN GAME"
-label_settings = SubResource("LabelSettings_o4y1c")
+label_settings = ExtResource("5_fxi6q")
 horizontal_alignment = 1
 
 [node name="ConnectButton" type="Button" parent="UI/Control" unique_id=1604766331 groups=["web_disable"]]

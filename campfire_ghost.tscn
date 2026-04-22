@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://bfxf7cl3mdgkf"]
+
+[ext_resource type="Script" uid="uid://r20sr70jc1b1" path="res://scripts/house_blueprint.gd" id="1_8uq5h"]
+[ext_resource type="PackedScene" uid="uid://dj7776tm61fkj" path="res://campfire_built.tscn" id="2_xvkko"]
+[ext_resource type="PackedScene" uid="uid://bvsmacr025ci5" path="res://Models/campfire.glb" id="2_ywn5l"]
+[ext_resource type="Material" uid="uid://b8d1kuqcuwnjk" path="res://Models/highlight.tres" id="3_xvkko"]
+[ext_resource type="FontFile" uid="uid://dnuoumjtjvhgb" path="res://ARCADECLASSIC.TTF" id="4_vnyea"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_w605o"]
+radius = 1.6380658
+
+[node name="Campfire_Ghost" type="Node3D" unique_id=1161190200]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+script = ExtResource("1_8uq5h")
+buildable_name = "Campfire"
+logs_needed = 8
+rocks_needed = 8
+finished_house = ExtResource("2_xvkko")
+rocks_name = true
+logs_name = true
+
+[node name="campfire" parent="." unique_id=463990073 instance=ExtResource("2_ywn5l")]
+
+[node name="Cylinder_006" parent="campfire" index="0" unique_id=506494587]
+surface_material_override/0 = ExtResource("3_xvkko")
+
+[node name="Icosphere_001" parent="campfire" index="1" unique_id=499882704]
+surface_material_override/0 = ExtResource("3_xvkko")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=2064887892]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=171401624]
+shape = SubResource("SphereShape3D_w605o")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1543415197]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0542371, 0)
+text = "test"
+font = ExtResource("4_vnyea")
+font_size = 96
+
+[editable path="campfire"]

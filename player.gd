@@ -154,6 +154,7 @@ func _input(event):
 
 	if is_menu_open:
 		return
+
 	# 👇 mouse capture (web + desktop)
 	if event is InputEventMouseButton and event.pressed:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

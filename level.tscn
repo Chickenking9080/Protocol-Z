@@ -84,7 +84,7 @@ navigation_mesh = SubResource("NavigationMesh_f2txt")
 
 [node name="map" parent="World_Nav/Ground" unique_id=244287570 instance=ExtResource("2_n6hdu")]
 
-[node name="Plane " parent="World_Nav/Ground/map" index="0" unique_id=2032914990]
+[node name="Plane " parent="World_Nav/Ground/map" index="0" unique_id=418226163]
 layers = 513
 
 [node name="Screw" parent="World_Nav/Ground/map/Plane " index="1" unique_id=930834686 instance=ExtResource("3_aicyk")]

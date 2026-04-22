@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://uerigaus0sen"]
+
+[ext_resource type="FontFile" uid="uid://dnuoumjtjvhgb" path="res://ARCADECLASSIC.TTF" id="1_eqo4o"]
+
+[resource]
+font = ExtResource("1_eqo4o")
+font_size = 25
+shadow_size = 6
