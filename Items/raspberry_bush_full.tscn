@@ -10,12 +10,12 @@ radius = 0.61572266
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ulvq"]
 albedo_color = Color(0.24705882, 0.2, 0.16078432, 1)
 
-[node name="raspberry_bush" type="Node3D" unique_id=2133913085 node_paths=PackedStringArray("mesh", "meshGROWN")]
+[node name="raspberry_bush" type="Node3D" unique_id=2133913085 node_paths=PackedStringArray("meshGROWN")]
 script = ExtResource("1_ow5ee")
-mesh = NodePath("CSGSphere3D")
 meshGROWN = NodePath("raspberry")
 
 [node name="raspberry" parent="." unique_id=1734959641 instance=ExtResource("1_nscya")]
+visible = false
 
 [node name="StaticBody3D" type="StaticBody3D" parent="raspberry" unique_id=1802511662]
 
@@ -31,7 +31,7 @@ rings = 7
 material = SubResource("StandardMaterial3D_3ulvq")
 
 [node name="Timer" type="Timer" parent="." unique_id=713054842]
-wait_time = 10.0
+wait_time = 30.0
 one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

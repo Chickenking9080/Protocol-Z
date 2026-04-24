@@ -23,8 +23,6 @@ func _on_renderscale_toggled(toggled_on: bool) -> void:
 func _on_shadows_pressed() -> void:
 	if sun.shadow_enabled == true:
 		sun.shadow_enabled = false
-		Shadows.toggle_mode = false
 		
 	else:
 		sun.shadow_enabled = true
-		Shadows.toggle_mode = true

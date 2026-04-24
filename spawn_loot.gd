@@ -8,6 +8,7 @@ extends Node3D
 @export var spawn_interval: float = 600.0
 @export var spawn_radius: float = 100.0
 @export var spawn_height: float = 5.0
+@export var spawn_start: bool = true
 
 @export_group("Enemy Spawner Features")
 @export var require_server: bool = true
@@ -34,6 +35,7 @@ func _ready():
 	spawn_timer.start()
 
 	print("LootSpawner started. Spawning every ", spawn_interval, " seconds")
+	await get_tree().create_timer(5.0).timeout
 	_spawn_one()
 func _on_spawn_loot():
 	if require_server and not multiplayer.is_server():

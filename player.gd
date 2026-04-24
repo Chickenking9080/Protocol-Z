@@ -6,8 +6,8 @@ var SPEED = 5
 const JUMP_VELOCITY = 4.5
 var mouse_sensitivity = 0.1
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var hunger = 100
-var thirst = 100
+var hunger = 20
+var thirst = 20
 @export var player = 1
 
 # --- Pickable Item Scenes ---
@@ -156,7 +156,7 @@ func _input(event):
 		return
 
 	# 👇 mouse capture (web + desktop)
-	if event is InputEventMouseButton and event.pressed:
+	if event is InputEventMouseButton and event.pressed and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 	# 👇 camera movement (BOTH)
@@ -177,7 +177,13 @@ func _input(event):
 			rpc("drop_item_rpc", 2.0)
 		else:
 			handle_interaction()
-
+	if event.is_action_pressed("secondary_attack") and mode == "BUILDING":
+		current_ghost.queue_free()
+		current_ghost = null
+		current_structure_key = ""
+		mode = "HANDS"
+		_update_mode_visuals()
+		
 	if event.is_action_released("secondary_attack") and held_item:
 		rpc("drop_item_rpc", clamp(throw_force, 5.0, MAX_THROW_FORCE))
 		throw_force = 0.0
@@ -206,13 +212,35 @@ func _physics_process(delta):
 	health_bar.value = health
 	hunger_bar.value = hunger
 	thirst_bar.value = thirst
+	# Health, Hunger, And Thirst stat management
+	if health <= 0:
+		$Camera3D/Info/Death.visible = true
+		await get_tree().create_timer(3.0).timeout
+		global_position = Vector3(0, 5.521, 0)
+		health = 100
+		
+	else:
+		$Camera3D/Info/Death.visible = false
 
-	thirst -= 0.0007
-	hunger -= 0.0007
+	if thirst <= 10:
+		$Camera3D/Info/thirsty.visible = true
+		if thirst <= 0:
+			health -= 0.05
+	elif thirst >= 10:
+		$Camera3D/Info/thirsty.visible = false
+
+	if hunger <= 10:
+		$Camera3D/Info/hungry.visible = true
+		if hunger <= 0:
+			health -= 0.05
+	elif hunger >= 10:
+		$Camera3D/Info/hungry.visible = false
+
 
 	if SPEED == 10:
 		thirst -= 0.01
 
+	health = clamp(health, 0.0, 100.0)
 	thirst = clamp(thirst, 0.0, 100.0)
 	hunger = clamp(hunger, 0.0, 100.0)
 
@@ -222,9 +250,6 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-	if health <= 0:
-		global_position = Vector3(0, 5.521, 0)
-		health = 100
 
 	if is_multiplayer_authority() and not is_menu_open:
 		if held_item and Input.is_action_pressed("secondary_attack"):
@@ -398,7 +423,7 @@ func handle_interaction():
 	$Camera3D/axe/AnimationPlayer.play("hit")
 	if ray.is_colliding():
 		var target = ray.get_collider()
-		if mode == "HANDS" and target and target.is_in_group("pickable"):
+		if mode == "HANDS" or mode == "TORCH" and target and target.is_in_group("pickable"):
 			rpc("pick_up_item_rpc", target.get_path())
 		elif mode == "AXE" and target and target.has_method("damage"):
 			target.damage(10)
@@ -429,6 +454,9 @@ func pick_up_item_rpc(path):
 	var item = get_node_or_null(path)
 	if not item:
 		return
+	# Only allow picking up nodes tagged as pickable
+	if not item.is_in_group("pickable"):
+		return
 	item.set_multiplayer_authority(multiplayer.get_remote_sender_id())
 	held_item = item
 	if item is CollisionObject3D:
@@ -437,25 +465,32 @@ func pick_up_item_rpc(path):
 		item.freeze = true
 	for c in item.get_children():
 		if c is CollisionShape3D:
-			c.set_deferred("disabled", true)
+			c.disabled = true
 
 @rpc("any_peer", "call_local")
 func drop_item_rpc(force):
 	if held_item:
 		var item = held_item
+		print("DROP - item name: ", item.name)
+		print("DROP - freeze before: ", item.freeze)
+		for c in item.get_children():
+			if c is CollisionShape3D:
+				print("DROP - shape disabled before: ", c.disabled)
 		var level_node = get_tree().current_scene.find_child("Level", true, false)
 		if item is CollisionObject3D:
 			ray.remove_exception(item)
-		for c in item.get_children():
-			if c is CollisionShape3D:
-				c.set_deferred("disabled", false)
 		item.reparent(level_node if level_node else get_tree().current_scene)
 		if item is RigidBody3D:
 			item.freeze = false
 			item.set_multiplayer_authority(1)
 			var dir = (-camera.global_transform.basis.z + Vector3(0, 0.1, 0)).normalized()
 			item.apply_central_impulse(dir * force)
+		for c in item.get_children():
+			if c is CollisionShape3D:
+				c.disabled = false
+				print("DROP - shape disabled after: ", c.disabled)
 		held_item = null
+		
 
 @rpc("any_peer", "call_local")
 func delete_held_item_rpc(path):

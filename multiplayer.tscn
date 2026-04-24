@@ -511,16 +511,16 @@ layout_mode = 2
 [node name="Shadows" type="CheckButton" parent="QuitMenu/SettingsPanel/MarginContainer/VBoxContainer" unique_id=472202800]
 layout_mode = 2
 theme = ExtResource("5_r1ube")
-text = "Shadows"
+text = "Shadows Off"
 
 [node name="renderscale" type="CheckButton" parent="QuitMenu/SettingsPanel/MarginContainer/VBoxContainer" unique_id=217417046]
 layout_mode = 2
 theme = ExtResource("5_r1ube")
-text = "Render Scale 0.7 "
+text = "Render Scale 0.6"
 
 [node name="Label2" type="Label" parent="QuitMenu/SettingsPanel/MarginContainer/VBoxContainer" unique_id=296595951]
 layout_mode = 2
-text = "RENDER  SCALE  IS  A  LAST RESORT  FOR  PERFORMANCE"
+text = "RENDER  SCALE  IS  A  LAST RESORT  FOR  PERFORMANCE  CANNOT   BE  TURNED   OFF"
 label_settings = SubResource("LabelSettings_sqe1x")
 horizontal_alignment = 1
 autowrap_mode = 2

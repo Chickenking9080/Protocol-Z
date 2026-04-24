@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://djthnkfpkw12c" path="res://images/house.svg" id="18_7ahtn"]
 [ext_resource type="LabelSettings" uid="uid://uerigaus0sen" path="res://pixelsettings.tres" id="18_jm5j8"]
 [ext_resource type="FontFile" uid="uid://dnuoumjtjvhgb" path="res://ARCADECLASSIC.TTF" id="20_7ahtn"]
+[ext_resource type="Theme" uid="uid://dban654qiu5pj" path="res://font_menu.tres" id="24_7hik5"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_fb1vy"]
 properties/0/path = NodePath(".:player")
@@ -54,6 +55,18 @@ properties/0/replication_mode = 1
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_37qaq"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_jab13"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7hik5"]
+font = ExtResource("20_7ahtn")
+font_size = 121
+outline_size = 15
+outline_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qtqh7"]
+font = ExtResource("20_7ahtn")
+font_size = 39
+outline_size = 7
+outline_color = Color(1, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q13i1"]
 shader = ExtResource("13_op7ga")
@@ -93,10 +106,10 @@ tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.23333333, 0.5),
+"times": PackedFloat32Array(0, 0.26666668, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(-0.6103591, 0, 0), Vector3(-1.530706, 0, 0), Vector3(-0.6103591, 0, 0)]
+"values": [Vector3(-0.6103591, 0, 0), Vector3(-1.9889292, 0, 0), Vector3(-0.6103591, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bwjto"]
@@ -151,13 +164,13 @@ width = 110
 height = 110
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jm5j8"]
-bg_color = Color(1, 1, 1, 1)
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_urp6f"]
-radius = 1.0185547
+bg_color = Color(1, 1, 1, 0.7764706)
 
 [sub_resource type="LabelSettings" id="LabelSettings_bwjto"]
 font_size = 39
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_urp6f"]
+radius = 1.0185547
 
 [node name="Player" type="CharacterBody3D" unique_id=1701255094 groups=["player"]]
 script = ExtResource("1_hwwnj")
@@ -196,6 +209,73 @@ mesh = SubResource("CapsuleMesh_jab13")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49330866, 0)
 fov = 64.4
 
+[node name="Info" type="Control" parent="Camera3D" unique_id=1820175414]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Death" type="ColorRect" parent="Camera3D/Info" unique_id=184719014]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1077.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="Camera3D/Info/Death" unique_id=1022555306]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.5
+offset_top = -13.0
+offset_right = 71.5
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "You      DIED"
+label_settings = SubResource("LabelSettings_7hik5")
+horizontal_alignment = 1
+
+[node name="thirsty" type="Label" parent="Camera3D/Info" unique_id=1590516281]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 661.5
+offset_top = 780.0
+offset_right = 1218.5
+offset_bottom = 904.0003
+grow_horizontal = 2
+grow_vertical = 2
+text = "You  Are  thirsty"
+label_settings = SubResource("LabelSettings_qtqh7")
+horizontal_alignment = 1
+
+[node name="hungry" type="Label" parent="Camera3D/Info" unique_id=2036752733]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 661.5
+offset_top = 780.0
+offset_right = 1218.5
+offset_bottom = 904.0003
+grow_horizontal = 2
+grow_vertical = 2
+text = "
+You  Are  hungry"
+label_settings = SubResource("LabelSettings_qtqh7")
+horizontal_alignment = 1
+
 [node name="ColorRect" type="ColorRect" parent="Camera3D" unique_id=1866700970]
 material = SubResource("ShaderMaterial_q13i1")
 offset_right = 1920.0
@@ -230,7 +310,7 @@ collision_mask = 520
 collide_with_areas = true
 
 [node name="axe" parent="Camera3D" unique_id=1343986137 instance=ExtResource("3_i3pqv")]
-transform = Transform3D(0.59, 0, 0, 0, 0.483471, 0.33816534, 0, -0.33816546, 0.48347083, 0.49852374, -0.35056818, -0.6549202)
+transform = Transform3D(0.5899999, 0, 0, 0, 0.483471, 0.33816537, 0, -0.33816546, 0.48347086, 0.49852374, -0.35056818, -0.6549202)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D/axe" unique_id=1256555902]
 libraries/ = SubResource("AnimationLibrary_bwjto")
@@ -338,7 +418,6 @@ text = "You Ded"
 label_settings = SubResource("LabelSettings_ivps1")
 
 [node name="UI" type="Control" parent="." unique_id=2041218705]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -420,7 +499,6 @@ icon = ExtResource("6_b26j0")
 [node name="Crafting" type="CanvasLayer" parent="UI" unique_id=2096694815]
 
 [node name="Building" type="CanvasLayer" parent="UI" unique_id=943047855]
-visible = false
 
 [node name="Panel" type="Panel" parent="UI/Building" unique_id=1984279]
 anchors_preset = 8
@@ -484,7 +562,8 @@ offset_left = 652.0
 offset_top = 50.5
 offset_right = 763.0
 offset_bottom = 161.50005
-icon = ExtResource("6_b26j0")
+theme = ExtResource("24_7hik5")
+text = "BED"
 
 [node name="tentbutton" type="Button" parent="UI/Building/Panel" unique_id=770534750]
 visible = false
@@ -501,6 +580,7 @@ offset_left = 952.0
 offset_top = 51.0
 offset_right = 1063.0
 offset_bottom = 162.00005
+theme = ExtResource("24_7hik5")
 text = "Wall"
 
 [node name="floorbutton" type="Button" parent="UI/Building/Panel" unique_id=414146867]
@@ -509,6 +589,7 @@ offset_left = 1102.0
 offset_top = 51.0
 offset_right = 1213.001
 offset_bottom = 162.00005
+theme = ExtResource("24_7hik5")
 text = "Floor"
 
 [node name="bridgebutton" type="Button" parent="UI/Building/Panel" unique_id=1301926563]
@@ -538,16 +619,8 @@ offset_right = 1419.0
 offset_bottom = 825.5
 icon = ExtResource("5_dw050")
 
-[node name="Label3D" type="Label3D" parent="." unique_id=184694062]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.317236, 0)
-text = "DEFAULT"
-
-[node name="Area3D" type="Area3D" parent="." unique_id=281005447]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1479672767]
-shape = SubResource("CylinderShape3D_urp6f")
-
-[node name="Label" type="Label" parent="." unique_id=2122598917]
+[node name="FPS" type="Label" parent="UI" unique_id=2122598917]
+layout_mode = 0
 offset_left = 1726.0
 offset_top = -3.0
 offset_right = 1887.0
@@ -555,6 +628,15 @@ offset_bottom = 69.0
 text = "FPS 69"
 label_settings = SubResource("LabelSettings_bwjto")
 script = ExtResource("13_urp6f")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=184694062]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.317236, 0)
+text = "if u see this the username system killed itself yet again :)"
+
+[node name="Area3D" type="Area3D" parent="." unique_id=281005447]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1479672767]
+shape = SubResource("CylinderShape3D_urp6f")
 
 [connection signal="pressed" from="UI/InventoryMenu/VBox/AxeButton" to="." method="_on_axe_button_pressed"]
 [connection signal="pressed" from="UI/InventoryMenu/VBox/TorchButton" to="." method="_on_torch_button_pressed"]

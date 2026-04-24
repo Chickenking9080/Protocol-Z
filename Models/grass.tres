@@ -1,0 +1,31 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c0egdhonuiymx"]
+
+[ext_resource type="Shader" uid="uid://bdm74bbv2o3dc" path="res://Models/grass.gdshader" id="1_d4c25"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cu333"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jcqk8"]
+noise = SubResource("FastNoiseLite_cu333")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d4c25"]
+noise_type = 0
+frequency = 0.0303
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cu333"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_d4c25")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_d4c25")
+shader_parameter/layers = 4
+shader_parameter/depth_scale = 0.00999999977648
+shader_parameter/depth_strength = 0.5650000268375
+shader_parameter/detail_noise_texture = SubResource("NoiseTexture2D_cu333")
+shader_parameter/shape_detail_mix_factor = 0.4
+shader_parameter/detail_scale = Vector2(200, 200)
+shader_parameter/highlight_color = Color(0.576, 0.757, 0.424, 1)
+shader_parameter/base_color = Color(0.341, 0.569, 0.282, 1)
+shader_parameter/mix_amount = 0.0
+shader_parameter/colour_noise_texture = SubResource("NoiseTexture2D_jcqk8")
