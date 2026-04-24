@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://do7wlqbo03ad2"]
+
+[ext_resource type="Script" uid="uid://r20sr70jc1b1" path="res://scripts/house_blueprint.gd" id="1_0hr8v"]
+[ext_resource type="PackedScene" uid="uid://c77kmsmnaxrft" path="res://stairs_built.tscn" id="2_0hr8v"]
+[ext_resource type="Material" uid="uid://b8d1kuqcuwnjk" path="res://Models/highlight.tres" id="3_y6vlj"]
+[ext_resource type="FontFile" uid="uid://dnuoumjtjvhgb" path="res://ARCADECLASSIC.TTF" id="4_jr027"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mgr5p"]
+material = ExtResource("3_y6vlj")
+size = Vector3(4, 0.13, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ef2di"]
+size = Vector3(4.1123047, 1, 4.1276855)
+
+[node name="floorunbuilt" type="Node3D" unique_id=1492310174]
+transform = Transform3D(0.47, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, 0, 0, 0)
+script = ExtResource("1_0hr8v")
+buildable_name = "Stair"
+logs_needed = 2
+rocks_needed = 0
+finished_house = ExtResource("2_0hr8v")
+logs_name = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=984460925]
+mesh = SubResource("BoxMesh_mgr5p")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=639204259]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=212607881]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10107422, 0, 0.029174805)
+shape = SubResource("BoxShape3D_ef2di")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=625900217]
+text = "test"
+font = ExtResource("4_jr027")
+font_size = 96

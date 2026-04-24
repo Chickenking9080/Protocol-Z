@@ -465,8 +465,7 @@ shape = SubResource("CapsuleShape3D_vjlaa")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1443194537]
 avoidance_enabled = true
-debug_enabled = true
-debug_path_custom_color = Color(1, 0, 1, 1)
+use_3d_avoidance = true
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1258640791]
 

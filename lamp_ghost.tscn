@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://ck8xyrkldeu2o"]
+
+[ext_resource type="Script" uid="uid://r20sr70jc1b1" path="res://scripts/house_blueprint.gd" id="1_san1v"]
+[ext_resource type="PackedScene" uid="uid://d0ew6t4a4dgyb" path="res://lamp_built.tscn" id="2_ao7k8"]
+[ext_resource type="Material" uid="uid://b8d1kuqcuwnjk" path="res://Models/highlight.tres" id="3_b6gak"]
+[ext_resource type="FontFile" uid="uid://dnuoumjtjvhgb" path="res://ARCADECLASSIC.TTF" id="4_x0ifa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g3ag3"]
+albedo_color = Color(0.20875016, 0.06191259, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_m5o7m"]
+material = SubResource("StandardMaterial3D_g3ag3")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_x31in"]
+radius = 1.0692023
+
+[node name="ghost" type="Node3D" unique_id=1158515883]
+script = ExtResource("1_san1v")
+buildable_name = "LAMP"
+logs_needed = 1
+rocks_needed = 0
+finished_house = ExtResource("2_ao7k8")
+logs_name = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=34701497]
+transform = Transform3D(1, 0, 0, 0, 0.7965299, -0.6045991, 0, 0.6045991, 0.7965299, 0, 0, 0)
+mesh = SubResource("CylinderMesh_m5o7m")
+surface_material_override/0 = ExtResource("3_b6gak")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1773373153]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1420916319]
+shape = SubResource("SphereShape3D_x31in")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1133788013]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.629588, 0.6467595)
+text = "test"
+font = ExtResource("4_x0ifa")
+font_size = 51

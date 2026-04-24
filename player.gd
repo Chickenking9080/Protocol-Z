@@ -6,8 +6,8 @@ var SPEED = 5
 const JUMP_VELOCITY = 4.5
 var mouse_sensitivity = 0.1
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var hunger = 20
-var thirst = 20
+var hunger = 100
+var thirst = 100
 @export var player = 1
 
 # --- Pickable Item Scenes ---
@@ -221,6 +221,8 @@ func _physics_process(delta):
 		
 	else:
 		$Camera3D/Info/Death.visible = false
+		thirst -= 0.0005
+		hunger -= 0.0005
 
 	if thirst <= 10:
 		$Camera3D/Info/thirsty.visible = true
@@ -238,7 +240,7 @@ func _physics_process(delta):
 
 
 	if SPEED == 10:
-		thirst -= 0.01
+		thirst -= 0.0005
 
 	health = clamp(health, 0.0, 100.0)
 	thirst = clamp(thirst, 0.0, 100.0)

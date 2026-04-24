@@ -44,7 +44,7 @@ shape = SubResource("CylinderShape3D_il6tr")
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=18218797]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.4109578, 0)
 light_color = Color(1, 0.627451, 0, 1)
-light_energy = 4.168
+light_energy = 12.406
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2109119305]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.50977767, 0)

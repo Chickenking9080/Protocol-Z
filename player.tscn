@@ -16,13 +16,14 @@
 [ext_resource type="PackedScene" uid="uid://cr7hl6n61e7e1" path="res://bed_ghost.tscn" id="8_jm5j8"]
 [ext_resource type="PackedScene" uid="uid://u1cab5fio1e5" path="res://Models/torch.glb" id="8_nvl01"]
 [ext_resource type="Material" uid="uid://cu2bcfk0h7shn" path="res://Models/black.tres" id="9_ivps1"]
+[ext_resource type="PackedScene" uid="uid://do7wlqbo03ad2" path="res://stairs_ghost.tscn" id="9_qtqh7"]
 [ext_resource type="PackedScene" uid="uid://blnjcqh0o30lh" path="res://wallunbuilt.tscn" id="10_7hik5"]
+[ext_resource type="PackedScene" uid="uid://ck8xyrkldeu2o" path="res://lamp_ghost.tscn" id="10_qtqh7"]
 [ext_resource type="PackedScene" uid="uid://e0y71jpu7sdd" path="res://floorunbuilt.tscn" id="12_2wuci"]
 [ext_resource type="Shader" uid="uid://c87svpks21sy3" path="res://Models/player.gdshader" id="13_op7ga"]
 [ext_resource type="Script" uid="uid://cgrm6anltxaxs" path="res://scripts/fps_counter.gd" id="13_urp6f"]
 [ext_resource type="Script" uid="uid://cerxpooufqrbb" path="res://menu.gd" id="14_5tmop"]
 [ext_resource type="Script" uid="uid://bsoalm5lt4a8n" path="res://enable_animation.gd" id="14_7ahtn"]
-[ext_resource type="Texture2D" uid="uid://djthnkfpkw12c" path="res://images/house.svg" id="18_7ahtn"]
 [ext_resource type="LabelSettings" uid="uid://uerigaus0sen" path="res://pixelsettings.tres" id="18_jm5j8"]
 [ext_resource type="FontFile" uid="uid://dnuoumjtjvhgb" path="res://ARCADECLASSIC.TTF" id="20_7ahtn"]
 [ext_resource type="Theme" uid="uid://dban654qiu5pj" path="res://font_menu.tres" id="24_7hik5"]
@@ -163,6 +164,10 @@ font_size = 189
 width = 110
 height = 110
 
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2wuci"]
+width = 109
+height = 108
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jm5j8"]
 bg_color = Color(1, 1, 1, 0.7764706)
 
@@ -184,8 +189,12 @@ table_scene = ExtResource("7_7lmhl")
 table_ghost_scene = ExtResource("7_7lmhl")
 bed_scene = ExtResource("8_jm5j8")
 bed_ghost_scene = ExtResource("8_jm5j8")
+bridge_scene = ExtResource("9_qtqh7")
+bridge_ghost_scene = ExtResource("9_qtqh7")
 raspberry_bush_scene = ExtResource("7_u1c27")
 raspberry_bush_ghost_scene = ExtResource("7_u1c27")
+lamp_scene = ExtResource("10_qtqh7")
+lamp_ghost_scene = ExtResource("10_qtqh7")
 wall_scene = ExtResource("10_7hik5")
 wall_ghost_scene = ExtResource("10_7hik5")
 floor_scene = ExtResource("12_2wuci")
@@ -433,55 +442,67 @@ scale = Vector2(0.89, 0.89)
 
 [node name="AxeButton" type="Button" parent="UI/InventoryMenu/VBox" unique_id=546195622]
 layout_mode = 2
+theme = ExtResource("24_7hik5")
 text = "Axe"
 icon = ExtResource("6_b26j0")
 
 [node name="TorchButton" type="Button" parent="UI/InventoryMenu/VBox" unique_id=1977874687]
 layout_mode = 2
+theme = ExtResource("24_7hik5")
 text = "Torch"
 icon = ExtResource("6_b26j0")
 
 [node name="HandButton" type="Button" parent="UI/InventoryMenu/VBox" unique_id=1285707805]
 layout_mode = 2
+theme = ExtResource("24_7hik5")
 text = "Empty Hands"
 icon = ExtResource("5_dw050")
 
 [node name="LogButton" type="Button" parent="UI/InventoryMenu/VBox" unique_id=1861181294]
 layout_mode = 2
+theme = ExtResource("24_7hik5")
 text = "Log"
 icon = ExtResource("7_n7ghd")
 
 [node name="RockButton" type="Button" parent="UI/InventoryMenu/VBox" unique_id=860159923]
+visible = false
 layout_mode = 2
+theme = ExtResource("24_7hik5")
 text = "rock"
 icon = SubResource("NoiseTexture2D_b26j0")
 
 [node name="WaterButton" type="Button" parent="UI/InventoryMenu/VBox" unique_id=296494108]
 layout_mode = 2
-text = "water
+theme = ExtResource("24_7hik5")
+text = "drink water
 "
-icon = SubResource("NoiseTexture2D_b26j0")
+icon = SubResource("NoiseTexture2D_2wuci")
 
 [node name="FoodButton" type="Button" parent="UI/InventoryMenu/VBox" unique_id=1884139935]
 layout_mode = 2
-text = "food
+theme = ExtResource("24_7hik5")
+text = "eat food
 "
-icon = ExtResource("7_n7ghd")
+icon = SubResource("NoiseTexture2D_2wuci")
 
 [node name="LogLabel" type="Label" parent="UI/InventoryMenu/VBox" unique_id=792354178]
 layout_mode = 2
+theme = ExtResource("24_7hik5")
 text = "hehe"
 
 [node name="RockLabel" type="Label" parent="UI/InventoryMenu/VBox" unique_id=1099517352]
 layout_mode = 2
+theme = ExtResource("24_7hik5")
 text = "hehe"
 
 [node name="FoodLabel" type="Label" parent="UI/InventoryMenu/VBox" unique_id=1764629497]
 layout_mode = 2
+theme = ExtResource("24_7hik5")
 text = "hehe"
 
 [node name="WaterLabel" type="Label" parent="UI/InventoryMenu/VBox" unique_id=1517283285]
 layout_mode = 2
+theme = ExtResource("24_7hik5")
 text = "hehe"
 
 [node name="ColorRect" type="ColorRect" parent="UI/InventoryMenu" unique_id=802493734]
@@ -493,6 +514,7 @@ offset_left = 1488.0
 offset_top = 99.0
 offset_right = 1758.0
 offset_bottom = 210.0
+theme = ExtResource("24_7hik5")
 text = "Building Menu"
 icon = ExtResource("6_b26j0")
 
@@ -593,23 +615,23 @@ theme = ExtResource("24_7hik5")
 text = "Floor"
 
 [node name="bridgebutton" type="Button" parent="UI/Building/Panel" unique_id=1301926563]
-visible = false
 layout_mode = 0
 offset_left = 1250.0
 offset_top = 51.0
 offset_right = 1361.001
 offset_bottom = 162.00005
-icon = ExtResource("6_b26j0")
+theme = ExtResource("24_7hik5")
+text = "Stair"
 
 [node name="lampbutton" type="Button" parent="UI/Building/Panel" unique_id=1350133334]
-visible = false
 layout_mode = 0
 offset_left = 50.0
 offset_top = 200.0
 offset_right = 204.0
 offset_bottom = 354.0
 scale = Vector2(0.72, 0.72)
-icon = ExtResource("18_7ahtn")
+theme = ExtResource("24_7hik5")
+text = "Lamp"
 
 [node name="close" type="Button" parent="UI/Building/Panel" unique_id=731685578]
 layout_mode = 0
@@ -625,6 +647,7 @@ offset_left = 1726.0
 offset_top = -3.0
 offset_right = 1887.0
 offset_bottom = 69.0
+theme = ExtResource("24_7hik5")
 text = "FPS 69"
 label_settings = SubResource("LabelSettings_bwjto")
 script = ExtResource("13_urp6f")
@@ -632,6 +655,7 @@ script = ExtResource("13_urp6f")
 [node name="Label3D" type="Label3D" parent="." unique_id=184694062]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.317236, 0)
 text = "if u see this the username system killed itself yet again :)"
+font = ExtResource("20_7ahtn")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=281005447]
 

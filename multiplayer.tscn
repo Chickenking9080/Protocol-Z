@@ -7,6 +7,7 @@
 [ext_resource type="LabelSettings" uid="uid://uerigaus0sen" path="res://pixelsettings.tres" id="5_fxi6q"]
 [ext_resource type="Theme" uid="uid://dban654qiu5pj" path="res://font_menu.tres" id="5_r1ube"]
 [ext_resource type="Script" uid="uid://cfij34riayc56" path="res://quit_menu.gd" id="6_ox3ly"]
+[ext_resource type="Script" uid="uid://cmmkjpbspoptq" path="res://fullscreentoggle.gd" id="7_56a3p"]
 [ext_resource type="Script" uid="uid://c5dvn22o8dtps" path="res://settings_panel.gd" id="7_sqe1x"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wktud"]
@@ -25,6 +26,11 @@ outline_size = 10
 outline_color = Color(1, 0, 0, 1)
 shadow_size = 38
 shadow_color = Color(0, 0, 0, 0.5529412)
+
+[sub_resource type="LabelSettings" id="LabelSettings_otwdb"]
+line_spacing = 4.37
+paragraph_spacing = 1.38
+font_size = 27
 
 [sub_resource type="LabelSettings" id="LabelSettings_ox3ly"]
 font = ExtResource("3_wuni8")
@@ -381,6 +387,60 @@ text = "Protocol Z"
 label_settings = SubResource("LabelSettings_r1ube")
 horizontal_alignment = 1
 
+[node name="Label2" type="Label" parent="MainMenu" unique_id=2036779484]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 262.0
+offset_right = 712.0
+offset_bottom = 1252.0
+theme = ExtResource("5_r1ube")
+text = "WARNING: THIS   IS   A     TEST   BUILD   SO   EXPECT   BUGS   SORRY  
+- GLASS   IN   GAS   STATION   IS   BROKEN,   you   can   walk   through   it but   not   walk   out  
+game   can   only   be   played   in   windowed   mode   but   if   you   wanna risk   full   screen   use   the fullscreen   tick   thing   below (ONLY   1080P   OR MORE   MONITORS)
+Controls:
+- Left   mouse -  Hit,   Place   Buildable,   Pickup   Items
+- Right   Mouse -   Throw   Held   Item,   Cancel   buildable   (if   not   placed)
+- WASD   to   move
+- E - When   holding   item (some   items   dont   work) put   it   in   iventory.   Items that   work   have   buttons   in   inventory
+- I - Inventory
+- ESC - Pause   Menu
+- 1 - Empty   Hands
+- 2 - Axe
+- 3 - Torch
+Have   Fun!
+"
+label_settings = SubResource("LabelSettings_otwdb")
+autowrap_mode = 3
+
+[node name="Label3" type="Label" parent="MainMenu" unique_id=1121524336]
+layout_mode = 0
+offset_left = 1240.0
+offset_top = 224.0
+offset_right = 1938.0
+offset_bottom = 1214.0
+theme = ExtResource("5_r1ube")
+text = "- The   point   of   the   game   is   to   try   and   survive   by   keeping   your   stats   in   check   and   build   cool   structures 
+
+ - loot   spawns   every   about   5   minutes   and   zombies   spawn   randomly   
+
+- to   build   you   open   inventory   and   click   build   menu,   choose   what   structure   you   want   and   then click   to   place   it   once   it   is   placed   throw   the   materials   it   needs   into   it   and   it   will   build   
+
+
+
+**MULTIPLAYER   HAS   ISSUES   Web   build   only   has   singleplayer   and   no   shadows**"
+label_settings = SubResource("LabelSettings_otwdb")
+autowrap_mode = 3
+
+[node name="CheckButton" type="CheckButton" parent="MainMenu" unique_id=833936536]
+layout_mode = 0
+offset_left = 461.0
+offset_top = 813.0
+offset_right = 679.0
+offset_bottom = 896.0
+theme = ExtResource("5_r1ube")
+text = "FullScreen"
+script = ExtResource("7_56a3p")
+
 [node name="Version ID" type="Label" parent="." unique_id=1990336356]
 anchors_preset = 5
 anchor_left = 0.5
@@ -539,6 +599,7 @@ text = "Back"
 [connection signal="pressed" from="MainMenu/Quit" to="MainMenu" method="_on_quit_pressed"]
 [connection signal="pressed" from="MainMenu/Singleplayer" to="." method="_on_singleplayer_pressed"]
 [connection signal="pressed" from="MainMenu/Singleplayer" to="MainMenu" method="_on_singleplayer_pressed"]
+[connection signal="toggled" from="MainMenu/CheckButton" to="MainMenu/CheckButton" method="_on_toggled"]
 [connection signal="pressed" from="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer/ResumeButton" to="QuitMenu" method="_on_resume_pressed"]
 [connection signal="pressed" from="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer/SettingsButton" to="QuitMenu" method="_on_settings_pressed"]
 [connection signal="pressed" from="QuitMenu/MainPausePanel/MarginContainer/VBoxContainer/BackToLobbyButton" to="QuitMenu" method="_on_back_to_lobby_pressed"]
