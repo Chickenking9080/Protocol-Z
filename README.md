@@ -82,3 +82,8 @@ The player can build many different structures such as:
 - lamp
 - wall
 - floor
+
+### Optimisation
+
+- I optimised the game by using a timer for the enemy so that it isnt updating its pathfinding system every frame and it only does it every 0.1 seconds. I also optimised it by making it so that the enemys rotation doesnt do the same and it updates to where it is going every 0.35 seconds. This improved the FPS drastically and improved it from 40fps to a solid 60fps
+- I also noticed that the many trees rendering were causing issues so i implemented an LOD system, if the tree is far enough away it hides it to save VRAM and leave out more GPU and RAM headroom. This removed all the stuttering i was experiencing.
